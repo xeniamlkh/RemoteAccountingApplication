@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ui.RestoreFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.03" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.97" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.03" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.97" />
+
+            <ImageView
+                android:id="@+id/warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/warning_restore"
+                android:src="@drawable/ic_warning"
+                app:layout_constraintBottom_toTopOf="@id/restore_description"
+                app:layout_constraintEnd_toStartOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+            <TextView
+                android:id="@+id/restore_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/restore_description"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+                app:layout_constraintEnd_toStartOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/warning"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/table_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/restore_table"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/restore_sales_btn"
+                app:layout_constraintEnd_toStartOf="@id/row_number"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toEndOf="@id/restore_description"
+                app:layout_constraintTop_toTopOf="@id/guidelineTop"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <TextView
+                android:id="@+id/row_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rows"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/table_title"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintHorizontal_weight="1.5"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/table_title" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/restore_status"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/table_title"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintHorizontal_weight="1.5"
+                app:layout_constraintStart_toEndOf="@id/row_number"
+                app:layout_constraintTop_toTopOf="@id/table_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_sales_btn"
+                style="@style/ButtonStyleSize13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/sales"
+                app:layout_constraintBottom_toTopOf="@id/restore_products_btn"
+                app:layout_constraintEnd_toEndOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/table_title"
+                app:layout_constraintTop_toBottomOf="@id/table_title" />
+
+            <TextView
+                android:id="@+id/sales_rows"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/restore_sales_btn"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/restore_sales_btn" />
+
+            <ImageView
+                android:id="@+id/sales_check"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/restore_sales_btn"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/sales_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_sales_btn" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_products_btn"
+                style="@style/ButtonStyleSize13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/products_eng"
+                app:layout_constraintBottom_toTopOf="@id/restore_payment_types_btn"
+                app:layout_constraintEnd_toEndOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/table_title"
+                app:layout_constraintTop_toBottomOf="@id/restore_sales_btn" />
+
+            <TextView
+                android:id="@+id/products_rows"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/restore_products_btn"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/restore_products_btn" />
+
+            <ImageView
+                android:id="@+id/products_check"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/restore_products_btn"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/products_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_products_btn" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_payment_types_btn"
+                style="@style/ButtonStyleSize13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/payment_types_eng"
+                app:layout_constraintBottom_toTopOf="@id/restore_sale_types_btn"
+                app:layout_constraintEnd_toEndOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/table_title"
+                app:layout_constraintTop_toBottomOf="@id/restore_products_btn" />
+
+            <TextView
+                android:id="@+id/payment_types_rows"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/restore_payment_types_btn"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/restore_payment_types_btn" />
+
+            <ImageView
+                android:id="@+id/payment_types_check"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/restore_payment_types_btn"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/payment_types_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_payment_types_btn" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_sale_types_btn"
+                style="@style/ButtonStyleSize13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/sale_types_eng"
+                app:layout_constraintBottom_toTopOf="@id/restore_names_btn"
+                app:layout_constraintEnd_toEndOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/table_title"
+                app:layout_constraintTop_toBottomOf="@id/restore_payment_types_btn" />
+
+            <TextView
+                android:id="@+id/sale_types_rows"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/restore_sale_types_btn"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/restore_sale_types_btn" />
+
+            <ImageView
+                android:id="@+id/sale_types_check"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/restore_sale_types_btn"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/sale_types_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_sale_types_btn" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_names_btn"
+                style="@style/ButtonStyleSize13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/names_eng"
+                app:layout_constraintBottom_toTopOf="@id/restore_acceptances_btn"
+                app:layout_constraintEnd_toEndOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/table_title"
+                app:layout_constraintTop_toBottomOf="@id/restore_sale_types_btn" />
+
+            <TextView
+                android:id="@+id/names_rows"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/restore_names_btn"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/restore_names_btn" />
+
+            <ImageView
+                android:id="@+id/names_check"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/restore_names_btn"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/names_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_names_btn" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_acceptances_btn"
+                style="@style/ButtonStyleSize13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/acceptances_eng"
+                app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+                app:layout_constraintEnd_toEndOf="@id/table_title"
+                app:layout_constraintStart_toStartOf="@id/table_title"
+                app:layout_constraintTop_toBottomOf="@id/restore_names_btn" />
+
+            <TextView
+                android:id="@+id/acceptances_rows"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/restore_acceptances_btn"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintStart_toEndOf="@id/table_title"
+                app:layout_constraintTop_toTopOf="@id/restore_acceptances_btn" />
+
+            <ImageView
+                android:id="@+id/acceptances_check"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/restore_acceptances_btn"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/acceptances_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_acceptances_btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

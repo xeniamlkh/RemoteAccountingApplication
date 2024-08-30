@@ -1,0 +1,102 @@
+<resources>
+
+    <style name="Theme.RemoteAccountingApplication" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+
+        <item name="colorSecondary">@color/colorSecondary</item>
+
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <item name="colorOnSurface">@color/textColor</item>
+
+        <item name="android:windowBackground">@color/windowBackgroundColor</item>
+        <item name="android:textColor">@color/textColor</item>
+
+        <item name="android:popupMenuStyle">@style/PopupMenuBackground</item>
+
+        <item name="popupTheme">@style/OptionsMenuStyle</item>
+
+        <item name="textInputStyle">@style/HintColor</item>
+
+        <item name="iconTint">@color/textColor</item>
+        <item name="tint">@color/textColor</item>
+
+        <item name="snackbarStyle">@style/SnackBarBackground</item>
+        <item name="snackbarTextViewStyle">@style/SnackBarTextColor</item>
+
+    </style>
+
+    <style name="PopupMenuBackground">
+        <item name="android:popupBackground">@color/windowBackgroundColor</item>
+        <item name="android:popupElevation">10dp</item>
+    </style>
+
+    <style name="OptionsMenuStyle" parent="Theme.AppCompat.DayNight">
+        <item name="android:itemBackground">@color/windowBackgroundColor</item>
+        <item name="android:popupBackground">@color/windowBackgroundColor</item>
+    </style>
+
+    <style name="CustomDatePickerDialog" parent="@style/Theme.Material3.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/windowBackgroundColor</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:textColorSecondary">@color/textColor</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorSecondaryInverse">@color/white</item>
+        <item name="android:buttonBarPositiveButtonStyle">
+            @style/CustomDatePickerDialog.ButtonStyle
+        </item>
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/CustomDatePickerDialog.ButtonStyle
+        </item>
+    </style>
+
+    <style name="CustomDatePickerDialog.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="DropDownListViewStyle" parent="Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox">
+        <item name="android:popupBackground">@color/grey</item>
+    </style>
+
+    <style name="HintColor" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/grey_variant</item>
+    </style>
+
+    <style name="ButtonStyleSize13" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="ButtonStyleSize18" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ButtonStyleSize10" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="NoteItemBackground" parent="CardView">
+        <item name="cardBackgroundColor">@color/windowBackgroundColor</item>
+        <item name="cardCornerRadius">20dp</item>
+    </style>
+
+    <style name="SnackBarBackground" parent="Widget.MaterialComponents.Snackbar">
+        <item name="backgroundTint">@color/grey</item>
+    </style>
+
+    <style name="SnackBarTextColor" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/colorOnSecondary</item>
+    </style>
+</resources>

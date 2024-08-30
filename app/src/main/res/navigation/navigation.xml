@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/insertFragment">
+
+    <fragment
+        android:id="@+id/insertFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.InsertFragment"
+        android:label="@string/label_fragment_insert"
+        tools:layout="@layout/fragment_insert"></fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.ReportFragment"
+        android:label="@string/label_fragment_report"
+        tools:layout="@layout/fragment_report">
+        <action
+            android:id="@+id/action_reportFragment_to_editSaleFragment"
+            app:destination="@id/editSaleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.ProductsFragment"
+        android:label="@string/label_fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_editHandbookFragment"
+            app:destination="@id/editHandbookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/namesFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.NamesFragment"
+        android:label="@string/label_fragment_names"
+        tools:layout="@layout/fragment_names" >
+        <action
+            android:id="@+id/action_namesFragment_to_editHandbookFragment"
+            app:destination="@id/editHandbookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentTypesFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.PaymentTypesFragment"
+        android:label="@string/label_fragment_payment_types"
+        tools:layout="@layout/fragment_payment_types" >
+        <action
+            android:id="@+id/action_paymentTypesFragment_to_editHandbookFragment"
+            app:destination="@id/editHandbookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleTypesFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.SaleTypesFragment"
+        android:label="@string/label_fragment_sale_types"
+        tools:layout="@layout/fragment_sale_types" >
+        <action
+            android:id="@+id/action_saleTypesFragment_to_editHandbookFragment"
+            app:destination="@id/editHandbookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dateRangeFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.DateRangeFragment"
+        android:label="@string/label_fragment_date_range"
+        tools:layout="@layout/fragment_date_range" />
+    <fragment
+        android:id="@+id/editSaleFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.EditSaleFragment"
+        android:label="@string/label_fragment_edit_sale"
+        tools:layout="@layout/fragment_edit_sale">
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editSaleFragment_to_reportFragment"
+            app:destination="@id/reportFragment"
+            app:popUpTo="@id/insertFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editHandbookFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.EditHandbookFragment"
+        android:label="{dynamicTitle}"
+        tools:layout="@layout/fragment_edit_handbook">
+        <action
+            android:id="@+id/action_editHandbookFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:popUpTo="@id/insertFragment" />
+        <argument
+            android:name="tableId"
+            app:argType="integer" />
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editHandbookFragment_to_paymentTypesFragment"
+            app:destination="@id/paymentTypesFragment"
+            app:popUpTo="@id/insertFragment" />
+        <action
+            android:id="@+id/action_editHandbookFragment_to_saleTypesFragment"
+            app:destination="@id/saleTypesFragment"
+            app:popUpTo="@id/insertFragment" />
+        <argument
+            android:name="dynamicTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editHandbookFragment_to_namesFragment"
+            app:destination="@id/namesFragment"
+            app:popUpTo="@id/insertFragment" />
+        <action
+            android:id="@+id/action_editHandbookFragment_to_acceptanceReportFragment"
+            app:destination="@id/acceptanceReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/backupFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.BackupFragment"
+        android:label="@string/label_fragment_backup"
+        tools:layout="@layout/fragment_backup" />
+    <fragment
+        android:id="@+id/restoreFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.RestoreFragment"
+        android:label="@string/label_fragment_restore"
+        tools:layout="@layout/fragment_restore" />
+    <fragment
+        android:id="@+id/acceptanceFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.AcceptanceFragment"
+        android:label="@string/label_fragment_acceptance"
+        tools:layout="@layout/fragment_acceptance">
+        <action
+            android:id="@+id/action_acceptanceFragment_to_acceptanceNameFragment"
+            app:destination="@id/acceptanceNameFragment"
+            app:popUpTo="@id/insertFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_acceptanceFragment_to_editHandbookFragment"
+            app:destination="@id/editHandbookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptanceNameFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.AcceptanceNameFragment"
+        android:label="@string/label_fragment_acceptance_name"
+        tools:layout="@layout/fragment_acceptance_name">
+        <action
+            android:id="@+id/action_acceptanceNameFragment_to_acceptanceFragment"
+            app:destination="@id/acceptanceFragment"
+            app:popUpTo="@id/insertFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptanceReportFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.AcceptanceReportFragment"
+        android:label="@string/fragment_acceptance_report"
+        tools:layout="@layout/fragment_acceptance_report">
+        <action
+            android:id="@+id/action_acceptanceReportFragment_to_editHandbookFragment"
+            app:destination="@id/editHandbookFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/acceptancesAlertDialog"
+        android:name="com.example.remoteaccountingapplication.ui.alertdialogs.AcceptancesAlertDialog"
+        android:label="AcceptancesAlertDialog" >
+        <action
+            android:id="@+id/action_acceptancesAlertDialog_to_acceptanceNameFragment"
+            app:destination="@id/acceptanceNameFragment"
+            app:popUpTo="@id/insertFragment" />
+    </dialog>
+</navigation>

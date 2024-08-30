@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ui.BackupFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <ImageView
+        android:id="@+id/warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/warning_backup"
+        android:src="@drawable/ic_warning"
+        app:layout_constraintBottom_toTopOf="@id/backup_description"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+    <TextView
+        android:id="@+id/backup_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_a_manual_backup"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/backup_btn"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/warning" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backup_btn"
+        style="@style/ButtonStyleSize13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backup"
+        app:layout_constraintBottom_toTopOf="@id/table_title"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/backup_description" />
+
+    <TextView
+        android:id="@+id/table_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/table_name"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/sales_track"
+        app:layout_constraintEnd_toStartOf="@id/status"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/backup_btn" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/backup_status"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/table_title"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/table_title"
+        app:layout_constraintTop_toTopOf="@id/table_title" />
+
+    <TextView
+        android:id="@+id/sales_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/_1_sales"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/products_track"
+        app:layout_constraintEnd_toStartOf="@id/sales_check"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/table_title" />
+
+    <ImageView
+        android:id="@+id/sales_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/sales_track"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/sales_track"
+        app:layout_constraintTop_toTopOf="@id/sales_track" />
+
+    <TextView
+        android:id="@+id/products_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/_2_products"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/payment_types_track"
+        app:layout_constraintEnd_toStartOf="@id/products_check"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/sales_track" />
+
+    <ImageView
+        android:id="@+id/products_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/products_track"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/products_track"
+        app:layout_constraintTop_toTopOf="@id/products_track" />
+
+    <TextView
+        android:id="@+id/payment_types_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/_3_payment_types"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/sale_types_track"
+        app:layout_constraintEnd_toStartOf="@id/payment_types_check"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/products_track" />
+
+    <ImageView
+        android:id="@+id/payment_types_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/payment_types_track"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/payment_types_track"
+        app:layout_constraintTop_toTopOf="@id/payment_types_track" />
+
+    <TextView
+        android:id="@+id/sale_types_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/_4_sale_types"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/names_track"
+        app:layout_constraintEnd_toStartOf="@id/sale_types_check"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/payment_types_track" />
+
+    <ImageView
+        android:id="@+id/sale_types_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/sale_types_track"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/sale_types_track"
+        app:layout_constraintTop_toTopOf="@id/sale_types_track" />
+
+    <TextView
+        android:id="@+id/names_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/_5_names"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/acceptances_track"
+        app:layout_constraintEnd_toStartOf="@id/names_check"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/sale_types_track" />
+
+    <ImageView
+        android:id="@+id/names_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/names_track"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/names_track"
+        app:layout_constraintTop_toTopOf="@id/names_track" />
+
+    <TextView
+        android:id="@+id/acceptances_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/_6_acceptances"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toStartOf="@id/acceptances_check"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/names_track" />
+
+    <ImageView
+        android:id="@+id/acceptances_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_check"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/acceptances_track"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/acceptances_track"
+        app:layout_constraintTop_toTopOf="@id/acceptances_track" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#BCBABA</color>
+    <color name="grey_variant">#525151</color>
+
+    <color name="colorPrimary">@color/black</color>
+    <color name="colorPrimaryDark">#fdc41d</color>
+    <color name="colorPrimaryVariant">#fdc41d</color>
+    <color name="colorOnPrimary">@color/white</color>
+
+    <color name="colorSecondary">#fdc41d</color>
+    <color name="colorOnSecondary">@color/black</color>
+
+    <color name="windowBackgroundColor">@color/white</color>
+    <color name="textColor">@color/black</color>
+</resources>

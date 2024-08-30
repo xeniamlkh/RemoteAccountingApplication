@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/ic_more_vert"
+        android:title="@string/menu"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/reportFragment"
+                android:title="@string/report" />
+            <item android:title="@string/acceptance">
+                <menu>
+                    <item
+                        android:id="@+id/acceptancesAlertDialog"
+                        android:title="@string/receive_goods" />
+                    <item
+                        android:id="@+id/acceptanceReportFragment"
+                        android:title="@string/acceptance_report" />
+                </menu>
+            </item>
+            <item android:title="@string/import_report">
+                <menu>
+                    <item
+                        android:id="@+id/thirty_btn"
+                        android:title="@string/_30" />
+                    <item
+                        android:id="@+id/dateRangeFragment"
+                        android:title="@string/range" />
+                </menu>
+            </item>
+            <item android:title="@string/handbooks">
+                <menu>
+                    <item
+                        android:id="@+id/productsFragment"
+                        android:title="@string/products" />
+                    <item
+                        android:id="@+id/paymentTypesFragment"
+                        android:title="@string/payment_types" />
+                    <item
+                        android:id="@+id/saleTypesFragment"
+                        android:title="@string/sale_types" />
+                    <item
+                        android:id="@+id/namesFragment"
+                        android:title="@string/names" />
+
+                </menu>
+            </item>
+            <item android:title="@string/settings">
+                <menu>
+                    <item
+                        android:id="@+id/backupFragment"
+                        android:title="@string/backup" />
+                    <item
+                        android:id="@+id/restoreFragment"
+                        android:title="@string/restore" />
+                </menu>
+            </item>
+        </menu>
+    </item>
+
+</menu>
