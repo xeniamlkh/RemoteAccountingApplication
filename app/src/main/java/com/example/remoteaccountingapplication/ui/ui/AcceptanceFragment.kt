@@ -228,28 +228,6 @@ class AcceptanceFragment : Fragment() {
 
                         viewModel.createUpdateProductWithRemains(product, price, newNumber, true)
 
-//                        viewModel.ifProductExist(product) // delete?
-//                            .observe(this.viewLifecycleOwner) { booleanAnswer ->
-//                                if (booleanAnswer) {
-//                                    if (!flagExist) {
-//                                        viewModel.updateProductByProduct(
-//                                            product,
-//                                            price,
-//                                            newNumber,
-//                                            true
-//                                        )
-//                                    }
-//                                    flagExist = true
-//                                } else {
-//                                    viewModel.createProductNoteWithRemains(
-//                                        product,
-//                                        price,
-//                                        newNumber,
-//                                        true
-//                                    )
-//                                }
-//                            }
-
                         viewModel.createAcceptanceItem(
                             todayDateCalc,
                             todayDate,

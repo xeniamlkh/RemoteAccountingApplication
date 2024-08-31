@@ -269,7 +269,7 @@ class EditSaleFragment : Fragment() {
             val name = nameString.trim().replace(",", "")
             val comment = commentString.trim().replace(",", "")
 
-            val price = priceString.trim().toDouble() //?
+            val price = priceString.trim().toDouble()
             val number = numberString.trim().toInt()
 
             val total = price * number
