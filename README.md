@@ -1,16 +1,14 @@
 # What is a Remote Accounting Application? 
 The Remote Accounting Application is the application that allows you to keep track of sales at remote locations without a permanent Internet connection. It contains the following functionality: 
 
-1) Recording sales
-2) Receiving goods at the warehouse
-3) Tracking sales and the receipt of goods
-4) Exporting CSV sales reports
-5) Operational data handbooks
-6) Backup
+1) Easy tracking of sales and receipts
+2) Export sales reports in CSV format
+3) Operational data handbooks
+4) Backup
 
 minSdk = 27, targetSdk = 34, language = Russian (English is coming soon...)
 
-## This project provides:
+## Technologies Used:
 * Android Architecture: UI, Model
 * Room database: Entities, DAO, SQL queries
 * Repository as an additional layer between the Room DB and ViewModel
