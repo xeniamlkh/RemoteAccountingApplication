@@ -165,12 +165,12 @@ class MainActivity : BaseActivity(), PermissionRationaleDialogListener {
                 true
             }
 
-            R.id.acceptancesAlertDialog -> {
+            R.id.receiptAlertDialog -> {
                 item.onNavDestinationSelected(navController)
                 true
             }
 
-            R.id.acceptanceReportFragment -> {
+            R.id.receiptReportFragment -> {
                 item.onNavDestinationSelected(navController)
                 true
             }

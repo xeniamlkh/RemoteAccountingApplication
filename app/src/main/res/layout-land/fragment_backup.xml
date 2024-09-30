@@ -190,7 +190,7 @@
         android:layout_marginStart="10dp"
         android:text="@string/_5_names"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/acceptances_track"
+        app:layout_constraintBottom_toTopOf="@id/receipt_track"
         app:layout_constraintEnd_toStartOf="@id/names_check"
         app:layout_constraintStart_toEndOf="@id/backup_description"
         app:layout_constraintTop_toBottomOf="@id/sale_types_track" />
@@ -207,26 +207,26 @@
         app:layout_constraintTop_toTopOf="@id/names_track" />
 
     <TextView
-        android:id="@+id/acceptances_track"
+        android:id="@+id/receipt_track"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/_6_acceptances"
+        android:text="@string/_6_receipt"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintEnd_toStartOf="@id/acceptances_check"
+        app:layout_constraintEnd_toStartOf="@id/receipt_check"
         app:layout_constraintStart_toEndOf="@id/backup_description"
         app:layout_constraintTop_toBottomOf="@id/names_track" />
 
     <ImageView
-        android:id="@+id/acceptances_check"
+        android:id="@+id/receipt_check"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_check"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/acceptances_track"
+        app:layout_constraintBottom_toBottomOf="@id/receipt_track"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toEndOf="@id/acceptances_track"
-        app:layout_constraintTop_toTopOf="@id/acceptances_track" />
+        app:layout_constraintStart_toEndOf="@id/receipt_track"
+        app:layout_constraintTop_toTopOf="@id/receipt_track" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

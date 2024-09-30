@@ -133,6 +133,7 @@ class RoomRepository(
     suspend fun updateProductNumberByProduct(product: String, remains: Int) {
         productsDao.updateProductNumberByProduct(product, remains)
     }
+
     suspend fun insertName(name: Names) {
         namesDao.insertName(name)
     }
@@ -219,19 +220,19 @@ class RoomRepository(
     }
 
 
-    suspend fun insertAcceptProduct(acceptProduct: Receipt) {
-        receiptDao.insertAcceptProduct(acceptProduct)
+    suspend fun insertReceiptProduct(receiptProduct: Receipt) {
+        receiptDao.insertReceiptProduct(receiptProduct)
     }
 
-    fun getListOfAcceptancesByDate(
+    fun getListOfReceiptByDate(
         startOfDay: Long,
         endOfDay: Long
     ): Flow<List<Receipt>> {
-        return receiptDao.getListOfAcceptancesByDate(startOfDay, endOfDay)
+        return receiptDao.getListOfReceiptByDate(startOfDay, endOfDay)
     }
 
-    fun getAcceptanceRowsNumber(): Flow<Int> {
-        return receiptDao.getAcceptanceRowsNumber()
+    fun getReceiptRowsNumber(): Flow<Int> {
+        return receiptDao.getReceiptRowsNumber()
     }
 
     fun dailyAllSalesBackUp(): Flow<List<String>> {
@@ -254,7 +255,7 @@ class RoomRepository(
         return namesDao.dailyNamesBackUp()
     }
 
-    fun dailyAcceptancesBackUpFlow(): Flow<List<String>> {
-        return receiptDao.dailyAcceptancesBackUpFlow()
+    fun dailyReceiptBackUpFlow(): Flow<List<String>> {
+        return receiptDao.dailyReceiptBackUpFlow()
     }
 }

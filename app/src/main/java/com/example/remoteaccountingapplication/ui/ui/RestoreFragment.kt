@@ -59,7 +59,7 @@ class RestoreFragment : Fragment() {
                             REQUEST_CODE_PAYMENT_TYPES -> importPaymentTypesCsv(uri)
                             REQUEST_CODE_SALE_TYPES -> importSaleTypesCsv(uri)
                             REQUEST_CODE_NAMES -> importNamesCsv(uri)
-                            REQUEST_CODE_ACCEPTANCES -> importAcceptancesCsv(uri)
+                            REQUEST_CODE_RECEIPT -> importReceiptOfGoodsCsv(uri)
                             else -> Snackbar
                                 .make(
                                     requireActivity().findViewById(android.R.id.content),
@@ -113,8 +113,9 @@ class RestoreFragment : Fragment() {
             binding.namesRows.text = number.toString()
         }
 
-        viewModel.getAcceptanceRowsNumber().observe(this.viewLifecycleOwner) { number ->
-            binding.acceptancesRows.text = number.toString()
+        // !!!!!!!
+        viewModel.getReceiptRowsNumber().observe(this.viewLifecycleOwner) { number ->
+            binding.receiptRows?.text = number.toString()
         }
 
         binding.restoreSalesBtn.setOnClickListener {
@@ -137,8 +138,8 @@ class RestoreFragment : Fragment() {
             restoreNamesTable()
         }
 
-        binding.restoreAcceptancesBtn.setOnClickListener {
-            restoreAcceptancesTable()
+        binding.restoreReceiptBtn?.setOnClickListener {
+            restoreReceiptTable()
         }
     }
 
@@ -187,8 +188,8 @@ class RestoreFragment : Fragment() {
         resultLauncher.launch(intent)
     }
 
-    private fun restoreAcceptancesTable() {
-        currentRequestCode = REQUEST_CODE_ACCEPTANCES
+    private fun restoreReceiptTable() {
+        currentRequestCode = REQUEST_CODE_RECEIPT
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"
@@ -497,18 +498,18 @@ class RestoreFragment : Fragment() {
         }
     }
 
-    private fun importAcceptancesCsv(uri: Uri) {
+    private fun importReceiptOfGoodsCsv(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
 
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
 
             if (fileName != null) {
 
-                if (!fileName.contains("Acceptances")) {
+                if (!fileName.contains("ReceiptOfGoods")) {
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_an_acceptances_table),
+                            getString(R.string.error_wrong_table_choose_an_receipt_table),
                             Snackbar.LENGTH_SHORT
                         )
                         .show()
@@ -532,7 +533,7 @@ class RestoreFragment : Fragment() {
                                     val priceDouble = priceString.toDouble()
                                     val numberInt = numberString.toInt()
 
-                                    viewModel.createAcceptanceItem(
+                                    viewModel.createReceiptItem(
                                         dateCalculationLong,
                                         dateString,
                                         nameString,
@@ -550,19 +551,20 @@ class RestoreFragment : Fragment() {
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.acceptances_table_imported),
+                            getString(R.string.receipt_table_imported),
                             Snackbar.LENGTH_SHORT
                         )
                         .show()
 
                     requireActivity().runOnUiThread {
-                        binding.acceptancesCheck.visibility = View.VISIBLE
+                        binding.receiptCheck?.visibility = View.VISIBLE
                     }
                 }
             }
         }
-        viewModel.getAcceptanceRowsNumber().observe(this.viewLifecycleOwner) { number ->
-            binding.acceptancesRows.text = number.toString()
+
+        viewModel.getReceiptRowsNumber().observe(this.viewLifecycleOwner) { number ->
+            binding.receiptRows?.text = number.toString()
         }
 
     }
@@ -585,6 +587,6 @@ class RestoreFragment : Fragment() {
         const val REQUEST_CODE_PAYMENT_TYPES = 1003
         const val REQUEST_CODE_SALE_TYPES = 1004
         const val REQUEST_CODE_NAMES = 1005
-        const val REQUEST_CODE_ACCEPTANCES = 1006
+        const val REQUEST_CODE_RECEIPT = 1006
     }
 }

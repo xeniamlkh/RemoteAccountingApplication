@@ -416,7 +416,7 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
     }
 
 
-    fun createAcceptanceItem(
+    fun createReceiptItem(
         dateCalc: Long,
         date: String,
         name: String,
@@ -435,22 +435,22 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
                 price,
                 number
             )
-        insertAcceptProduct(receipt)
+        insertReceiptProduct(receipt)
     }
 
-    private fun insertAcceptProduct(acceptProduct: Receipt) {
-        viewModelScope.launch { repository.insertAcceptProduct(acceptProduct) }
+    private fun insertReceiptProduct(receiptProduct: Receipt) {
+        viewModelScope.launch { repository.insertReceiptProduct(receiptProduct) }
     }
 
-    fun getListOfAcceptancesByDate(
+    fun getListOfReceiptByDate(
         startOfDay: Long,
         endOfDay: Long
     ): LiveData<List<Receipt>> {
-        return repository.getListOfAcceptancesByDate(startOfDay, endOfDay).asLiveData()
+        return repository.getListOfReceiptByDate(startOfDay, endOfDay).asLiveData()
     }
 
-    fun getAcceptanceRowsNumber(): LiveData<Int> {
-        return repository.getAcceptanceRowsNumber().asLiveData()
+    fun getReceiptRowsNumber(): LiveData<Int> {
+        return repository.getReceiptRowsNumber().asLiveData()
     }
 }
 

@@ -10,14 +10,14 @@
             <item
                 android:id="@+id/reportFragment"
                 android:title="@string/report" />
-            <item android:title="@string/acceptance">
+            <item android:title="@string/receipt">
                 <menu>
                     <item
-                        android:id="@+id/acceptancesAlertDialog"
+                        android:id="@+id/receiptAlertDialog"
                         android:title="@string/receive_goods" />
                     <item
-                        android:id="@+id/acceptanceReportFragment"
-                        android:title="@string/acceptance_report" />
+                        android:id="@+id/receiptReportFragment"
+                        android:title="@string/receipt_report" />
                 </menu>
             </item>
             <item android:title="@string/import_report">

@@ -17,7 +17,7 @@ abstract class RemoteAccountingDatabase : RoomDatabase() {
     abstract fun namesDao(): NamesDao
     abstract fun paymentTypeDao(): PaymentTypeDao
     abstract fun saleTypeDao(): SaleTypeDao
-    abstract fun acceptanceDao(): ReceiptDao
+    abstract fun receiptDao(): ReceiptDao
 
     companion object {
         @Volatile

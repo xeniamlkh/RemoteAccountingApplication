@@ -14,7 +14,7 @@ class RemoteAccountingApplication : Application() {
             database.namesDao(),
             database.paymentTypeDao(),
             database.saleTypeDao(),
-            database.acceptanceDao()
+            database.receiptDao()
         )
     }
 }

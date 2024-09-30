@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ui.AcceptanceFragment">
+    tools:context=".ui.ui.ReceiptFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -203,10 +203,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/accept_title"
+                android:id="@+id/receipt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/accept_title"
+                android:text="@string/receipt_title"
                 app:layout_constraintBottom_toTopOf="@id/product"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +222,7 @@
                 app:layout_constraintEnd_toStartOf="@id/price"
                 app:layout_constraintHorizontal_weight="2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/accept_title" />
+                app:layout_constraintTop_toBottomOf="@id/receipt_title" />
 
             <TextView
                 android:id="@+id/price"
@@ -234,7 +234,7 @@
                 app:layout_constraintEnd_toStartOf="@id/remains"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/product"
-                app:layout_constraintTop_toBottomOf="@id/accept_title" />
+                app:layout_constraintTop_toBottomOf="@id/receipt_title" />
 
             <TextView
                 android:id="@+id/remains"
@@ -246,19 +246,19 @@
                 app:layout_constraintEnd_toStartOf="@id/name"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/price"
-                app:layout_constraintTop_toBottomOf="@id/accept_title" />
+                app:layout_constraintTop_toBottomOf="@id/receipt_title" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/name_acceptance"
+                android:text="@string/name_receipt"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toTopOf="@id/recycler_view_report"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/remains"
-                app:layout_constraintTop_toBottomOf="@id/accept_title" />
+                app:layout_constraintTop_toBottomOf="@id/receipt_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_report"

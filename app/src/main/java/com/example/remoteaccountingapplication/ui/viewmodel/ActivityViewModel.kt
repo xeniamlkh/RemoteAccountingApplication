@@ -29,8 +29,8 @@ class ActivityViewModel(private val repository: RoomRepository) : ViewModel() {
         return repository.dailyNamesBackUp().asLiveData()
     }
 
-    fun dailyAcceptancesBackUpFlow(): LiveData<List<String>> {
-        return repository.dailyAcceptancesBackUpFlow().asLiveData()
+    fun dailyReceiptBackUpFlow(): LiveData<List<String>> {
+        return repository.dailyReceiptBackUpFlow().asLiveData()
     }
 
     fun exportMonthSales(): LiveData<List<String>> {

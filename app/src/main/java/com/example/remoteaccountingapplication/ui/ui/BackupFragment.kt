@@ -61,7 +61,7 @@ class BackupFragment : Fragment() {
             createPaymentTypesBackUp(filePath)
             createSaleTypesBackUp(filePath)
             createNamesBackUp(filePath)
-            createAcceptancesBackUp(filePath)
+            createReceiptOfGoodsBackUp(filePath)
 
             Snackbar
                 .make(
@@ -239,7 +239,7 @@ class BackupFragment : Fragment() {
         binding.namesCheck.visibility = View.VISIBLE
     }
 
-    private fun createAcceptancesBackUp(filePath: String) {
+    private fun createReceiptOfGoodsBackUp(filePath: String) {
 
         val fileDir = File(filePath)
 
@@ -247,16 +247,16 @@ class BackupFragment : Fragment() {
             fileDir.mkdir()
         }
 
-        val csvFile = File(fileDir, getString(R.string.acceptances_csv_backup_title, todayDate))
+        val csvFile = File(fileDir, getString(R.string.receipt_csv_backup_title, todayDate))
 
-        viewModel.dailyAcceptancesBackUpFlow().observe(this.viewLifecycleOwner) { acceptances ->
+        viewModel.dailyReceiptBackUpFlow().observe(this.viewLifecycleOwner) { receipt ->
 
             try {
                 val stream = FileOutputStream(csvFile)
                 val writer = OutputStreamWriter(stream, "UTF-16")
 
-                for (acceptance in acceptances) {
-                    writer.write(acceptance)
+                for (item in receipt) {
+                    writer.write(item)
                     writer.write("\n")
                 }
 
@@ -269,7 +269,7 @@ class BackupFragment : Fragment() {
             }
         }
 
-        binding.acceptancesCheck.visibility = View.VISIBLE
+        binding.receiptCheck?.visibility = View.VISIBLE
     }
 
     private fun checkBackupDir() {

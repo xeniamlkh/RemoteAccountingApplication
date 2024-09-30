@@ -9,14 +9,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ReceiptDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAcceptProduct(acceptProduct: Receipt)
+    suspend fun insertReceiptProduct(receiptProduct: Receipt)
 
-    @Query("SELECT * FROM acceptance WHERE dateCalculation BETWEEN :startOfDay AND :endOfDay")
-    fun getListOfAcceptancesByDate(startOfDay: Long, endOfDay: Long): Flow<List<Receipt>>
+    @Query("SELECT * FROM receipt WHERE dateCalculation BETWEEN :startOfDay AND :endOfDay")
+    fun getListOfReceiptByDate(startOfDay: Long, endOfDay: Long): Flow<List<Receipt>>
 
-    @Query("SELECT dateCalculation||','||date||','||name||','||product||','||price||','||number FROM acceptance")
-    fun dailyAcceptancesBackUpFlow(): Flow<List<String>>
+    @Query("SELECT dateCalculation||','||date||','||name||','||product||','||price||','||number FROM receipt")
+    fun dailyReceiptBackUpFlow(): Flow<List<String>>
 
-    @Query("SELECT COUNT(*) FROM acceptance")
-    fun getAcceptanceRowsNumber(): Flow<Int>
+    @Query("SELECT COUNT(*) FROM receipt")
+    fun getReceiptRowsNumber(): Flow<Int>
 }

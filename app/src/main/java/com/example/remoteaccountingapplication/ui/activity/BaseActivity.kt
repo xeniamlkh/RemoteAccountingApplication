@@ -51,8 +51,7 @@ open class BaseActivity : AppCompatActivity() {
             createPaymentTypesBackUp(fileDir, todayDate)
             createSaleTypesBackUp(fileDir, todayDate)
             createNamesBackUp(fileDir, todayDate)
-            createAcceptancesBackUp(fileDir, todayDate)
-
+            createReceiptOfGoodsBackUp(fileDir, todayDate)
         }
     }
 
@@ -248,17 +247,17 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAcceptancesBackUp(fileDir: File, todayDate: String) {
-        val csvFile = File(fileDir, getString(R.string.acceptances_csv_backup_title, todayDate))
+    private fun createReceiptOfGoodsBackUp(fileDir: File, todayDate: String) {
+        val csvFile = File(fileDir, getString(R.string.receipt_csv_backup_title, todayDate))
 
-        viewModel.dailyAcceptancesBackUpFlow().observe(this) { acceptances ->
+        viewModel.dailyReceiptBackUpFlow().observe(this) { receipt ->
 
             try {
                 val stream = FileOutputStream(csvFile)
                 val writer = OutputStreamWriter(stream, "UTF-16")
 
-                for (acceptance in acceptances) {
-                    writer.write(acceptance)
+                for (item in receipt) {
+                    writer.write(item)
                     writer.write("\n")
                 }
 

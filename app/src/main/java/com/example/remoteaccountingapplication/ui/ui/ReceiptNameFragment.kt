@@ -10,13 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.databinding.FragmentAcceptanceNameBinding
+import com.example.remoteaccountingapplication.databinding.FragmentReceiptNameBinding
 import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
 
-class AcceptanceNameFragment : Fragment() {
+class ReceiptNameFragment : Fragment() {
 
-    private var _binding: FragmentAcceptanceNameBinding? = null
+    private var _binding: FragmentReceiptNameBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: RemoteAccountingViewModel by activityViewModels {
@@ -30,7 +30,7 @@ class AcceptanceNameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAcceptanceNameBinding.inflate(inflater, container, false)
+        _binding = FragmentReceiptNameBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -55,8 +55,7 @@ class AcceptanceNameFragment : Fragment() {
             }
 
             view.findNavController().navigate(
-                AcceptanceNameFragmentDirections
-                    .actionAcceptanceNameFragmentToAcceptanceFragment(name)
+                ReceiptNameFragmentDirections.actionReceiptNameFragmentToReceiptFragment(name)
             )
         }
     }

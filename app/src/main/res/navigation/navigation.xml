@@ -104,8 +104,8 @@
             app:destination="@id/namesFragment"
             app:popUpTo="@id/insertFragment" />
         <action
-            android:id="@+id/action_editHandbookFragment_to_acceptanceReportFragment"
-            app:destination="@id/acceptanceReportFragment" />
+            android:id="@+id/action_editHandbookFragment_to_receiptReportFragment"
+            app:destination="@id/receiptReportFragment" />
     </fragment>
     <fragment
         android:id="@+id/backupFragment"
@@ -118,47 +118,47 @@
         android:label="@string/label_fragment_restore"
         tools:layout="@layout/fragment_restore" />
     <fragment
-        android:id="@+id/acceptanceFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.AcceptanceFragment"
-        android:label="@string/label_fragment_acceptance"
-        tools:layout="@layout/fragment_acceptance">
+        android:id="@+id/receiptFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.ReceiptFragment"
+        android:label="@string/label_fragment_receipt"
+        tools:layout="@layout/fragment_receipt">
         <action
-            android:id="@+id/action_acceptanceFragment_to_acceptanceNameFragment"
-            app:destination="@id/acceptanceNameFragment"
+            android:id="@+id/action_receiptFragment_to_receiptNameFragment"
+            app:destination="@id/receiptNameFragment"
             app:popUpTo="@id/insertFragment" />
         <argument
             android:name="name"
             app:argType="string" />
         <action
-            android:id="@+id/action_acceptanceFragment_to_editHandbookFragment"
+            android:id="@+id/action_receiptFragment_to_editHandbookFragment"
             app:destination="@id/editHandbookFragment" />
     </fragment>
     <fragment
-        android:id="@+id/acceptanceNameFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.AcceptanceNameFragment"
-        android:label="@string/label_fragment_acceptance_name"
-        tools:layout="@layout/fragment_acceptance_name">
+        android:id="@+id/receiptNameFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.ReceiptNameFragment"
+        android:label="@string/label_fragment_receipt_name"
+        tools:layout="@layout/fragment_receipt_name">
         <action
-            android:id="@+id/action_acceptanceNameFragment_to_acceptanceFragment"
-            app:destination="@id/acceptanceFragment"
+            android:id="@+id/action_receiptNameFragment_to_receiptFragment"
+            app:destination="@id/receiptFragment"
             app:popUpTo="@id/insertFragment" />
     </fragment>
     <fragment
-        android:id="@+id/acceptanceReportFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.AcceptanceReportFragment"
-        android:label="@string/fragment_acceptance_report"
-        tools:layout="@layout/fragment_acceptance_report">
+        android:id="@+id/receiptReportFragment"
+        android:name="com.example.remoteaccountingapplication.ui.ui.ReceiptReportFragment"
+        android:label="@string/fragment_receipt_report"
+        tools:layout="@layout/fragment_receipt_report">
         <action
-            android:id="@+id/action_acceptanceReportFragment_to_editHandbookFragment"
+            android:id="@+id/action_receiptReportFragment_to_editHandbookFragment"
             app:destination="@id/editHandbookFragment" />
     </fragment>
     <dialog
-        android:id="@+id/acceptancesAlertDialog"
-        android:name="com.example.remoteaccountingapplication.ui.alertdialogs.AcceptancesAlertDialog"
-        android:label="AcceptancesAlertDialog" >
+        android:id="@+id/receiptAlertDialog"
+        android:name="com.example.remoteaccountingapplication.ui.alertdialogs.ReceiptAlertDialog"
+        android:label="@string/receiptalertdialog" >
         <action
-            android:id="@+id/action_acceptancesAlertDialog_to_acceptanceNameFragment"
-            app:destination="@id/acceptanceNameFragment"
+            android:id="@+id/action_receiptAlertDialog_to_receiptNameFragment"
+            app:destination="@id/receiptNameFragment"
             app:popUpTo="@id/insertFragment" />
     </dialog>
 </navigation>

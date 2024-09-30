@@ -262,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/names_eng"
-                app:layout_constraintBottom_toTopOf="@id/restore_acceptances_btn"
+                app:layout_constraintBottom_toTopOf="@id/restore_receipt_btn"
                 app:layout_constraintEnd_toEndOf="@id/table_title"
                 app:layout_constraintStart_toStartOf="@id/table_title"
                 app:layout_constraintTop_toBottomOf="@id/restore_sale_types_btn" />
@@ -293,41 +293,41 @@
                 app:layout_constraintTop_toTopOf="@id/restore_names_btn" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/restore_acceptances_btn"
+                android:id="@+id/restore_receipt_btn"
                 style="@style/ButtonStyleSize13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/acceptances_eng"
+                android:text="@string/receipt_eng"
                 app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
                 app:layout_constraintEnd_toEndOf="@id/table_title"
                 app:layout_constraintStart_toStartOf="@id/table_title"
                 app:layout_constraintTop_toBottomOf="@id/restore_names_btn" />
 
             <TextView
-                android:id="@+id/acceptances_rows"
+                android:id="@+id/receipt_rows"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/_0"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/restore_acceptances_btn"
+                app:layout_constraintBottom_toBottomOf="@id/restore_receipt_btn"
                 app:layout_constraintEnd_toStartOf="@id/status"
                 app:layout_constraintStart_toEndOf="@id/table_title"
-                app:layout_constraintTop_toTopOf="@id/restore_acceptances_btn" />
+                app:layout_constraintTop_toTopOf="@id/restore_receipt_btn" />
 
             <ImageView
-                android:id="@+id/acceptances_check"
+                android:id="@+id/receipt_check"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_check"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/restore_acceptances_btn"
+                app:layout_constraintBottom_toBottomOf="@id/restore_receipt_btn"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintStart_toEndOf="@id/acceptances_rows"
-                app:layout_constraintTop_toTopOf="@id/restore_acceptances_btn" />
+                app:layout_constraintStart_toEndOf="@id/receipt_rows"
+                app:layout_constraintTop_toTopOf="@id/restore_receipt_btn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

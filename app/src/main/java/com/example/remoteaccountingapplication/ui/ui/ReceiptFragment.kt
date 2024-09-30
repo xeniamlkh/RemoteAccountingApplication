@@ -12,8 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.databinding.FragmentAcceptanceBinding
-import com.example.remoteaccountingapplication.ui.recyclerview.AcceptanceRecyclerViewAdapter
+import com.example.remoteaccountingapplication.databinding.FragmentReceiptBinding
+import com.example.remoteaccountingapplication.ui.recyclerview.ReceiptRecyclerViewAdapter
 import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -21,9 +21,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class AcceptanceFragment : Fragment() {
+class ReceiptFragment : Fragment() {
 
-    private var _binding: FragmentAcceptanceBinding? = null
+    private var _binding: FragmentReceiptBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: RemoteAccountingViewModel by activityViewModels {
@@ -33,8 +33,8 @@ class AcceptanceFragment : Fragment() {
         )
     }
 
-    private val args: AcceptanceFragmentArgs by navArgs()
-    private lateinit var adapter: AcceptanceRecyclerViewAdapter
+    private val args: ReceiptFragmentArgs by navArgs()
+    private lateinit var adapter: ReceiptRecyclerViewAdapter
 
     private var flagExist: Boolean = false
     private var currentProduct: String? = null
@@ -45,7 +45,7 @@ class AcceptanceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAcceptanceBinding.inflate(inflater, container, false)
+        _binding = FragmentReceiptBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,7 +53,7 @@ class AcceptanceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState != null) {
-            val receivedBundle = savedInstanceState.getBundle("acceptanceFragmentBundle")
+            val receivedBundle = savedInstanceState.getBundle("receiptFragmentBundle")
             if (receivedBundle != null) {
                 currentProduct = receivedBundle.getString("currentProduct")
                 currentRemains = receivedBundle.getInt("currentRemains")
@@ -228,7 +228,7 @@ class AcceptanceFragment : Fragment() {
 
                         viewModel.createUpdateProductWithRemains(product, price, newNumber, true)
 
-                        viewModel.createAcceptanceItem(
+                        viewModel.createReceiptItem(
                             todayDateCalc,
                             todayDate,
                             name,
@@ -259,9 +259,9 @@ class AcceptanceFragment : Fragment() {
             }
         }
 
-        viewModel.getListOfAcceptancesByDate(startOfToday, endOfToday)
-            .observe(this.viewLifecycleOwner) { acceptancesList ->
-                adapter = AcceptanceRecyclerViewAdapter(acceptancesList)
+        viewModel.getListOfReceiptByDate(startOfToday, endOfToday)
+            .observe(this.viewLifecycleOwner) { receiptList ->
+                adapter = ReceiptRecyclerViewAdapter(receiptList)
                 binding.recyclerViewReport.adapter = adapter
             }
     }
@@ -305,7 +305,7 @@ class AcceptanceFragment : Fragment() {
         bundle.putInt("currentDay", currentDay)
         bundle.putBoolean("flagExist", flagExist)
 
-        outState.putBundle("acceptanceFragmentBundle", bundle)
+        outState.putBundle("receiptFragmentBundle", bundle)
     }
 
     override fun onDestroyView() {

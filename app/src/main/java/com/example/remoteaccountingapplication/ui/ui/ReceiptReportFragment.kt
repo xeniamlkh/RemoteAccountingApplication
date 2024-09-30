@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.databinding.FragmentAcceptanceReportBinding
-import com.example.remoteaccountingapplication.ui.recyclerview.AcceptanceRecyclerViewAdapter
+import com.example.remoteaccountingapplication.databinding.FragmentReceiptReportBinding
+import com.example.remoteaccountingapplication.ui.recyclerview.ReceiptRecyclerViewAdapter
 import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class AcceptanceReportFragment : Fragment(), DateListener {
+class ReceiptReportFragment : Fragment(), DateListener {
 
-    private var _binding: FragmentAcceptanceReportBinding? = null
+    private var _binding: FragmentReceiptReportBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: RemoteAccountingViewModel by activityViewModels {
@@ -27,7 +27,7 @@ class AcceptanceReportFragment : Fragment(), DateListener {
         )
     }
 
-    private lateinit var adapter: AcceptanceRecyclerViewAdapter
+    private lateinit var adapter: ReceiptRecyclerViewAdapter
 
     private var currentDay: Int = 0
     private val simpleTodayDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -36,7 +36,7 @@ class AcceptanceReportFragment : Fragment(), DateListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAcceptanceReportBinding.inflate(inflater, container, false)
+        _binding = FragmentReceiptReportBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -50,7 +50,7 @@ class AcceptanceReportFragment : Fragment(), DateListener {
         val startOfToday = getStartOfTodayInMillis(currentDay)
         val endOfToday = getEndOfTodayInMillis(currentDay)
 
-        getListOfAcceptances(startOfToday, endOfToday)
+        getListOfReceiptOfGoods(startOfToday, endOfToday)
 
         binding.previousDayBtn.setOnClickListener {
             currentDay -= 1
@@ -58,7 +58,7 @@ class AcceptanceReportFragment : Fragment(), DateListener {
             val previousDayStart = getStartOfTodayInMillis(currentDay)
             val previousDayEnd = getEndOfTodayInMillis(currentDay)
 
-            getListOfAcceptances(previousDayStart, previousDayEnd)
+            getListOfReceiptOfGoods(previousDayStart, previousDayEnd)
         }
 
         binding.nextDayBtn.setOnClickListener {
@@ -67,7 +67,7 @@ class AcceptanceReportFragment : Fragment(), DateListener {
             val previousDayStart = getStartOfTodayInMillis(currentDay)
             val previousDayEnd = getEndOfTodayInMillis(currentDay)
 
-            getListOfAcceptances(previousDayStart, previousDayEnd)
+            getListOfReceiptOfGoods(previousDayStart, previousDayEnd)
         }
 
         binding.date.setOnClickListener {
@@ -97,11 +97,11 @@ class AcceptanceReportFragment : Fragment(), DateListener {
         return calendarInstance.timeInMillis
     }
 
-    private fun getListOfAcceptances(startOfToday: Long, endOfToday: Long) {
+    private fun getListOfReceiptOfGoods(startOfToday: Long, endOfToday: Long) {
 
-        viewModel.getListOfAcceptancesByDate(startOfToday, endOfToday)
-            .observe(this.viewLifecycleOwner) { acceptancesList ->
-                adapter = AcceptanceRecyclerViewAdapter(acceptancesList)
+        viewModel.getListOfReceiptByDate(startOfToday, endOfToday)
+            .observe(this.viewLifecycleOwner) { receiptList ->
+                adapter = ReceiptRecyclerViewAdapter(receiptList)
                 binding.recyclerViewReport.adapter = adapter
             }
     }
@@ -112,6 +112,6 @@ class AcceptanceReportFragment : Fragment(), DateListener {
         val previousDayStart = getStartOfTodayInMillis(currentDay)
         val previousDayEnd = getEndOfTodayInMillis(currentDay)
 
-        getListOfAcceptances(previousDayStart, previousDayEnd)
+        getListOfReceiptOfGoods(previousDayStart, previousDayEnd)
     }
 }

@@ -7,16 +7,16 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.remoteaccountingapplication.R
 
-class AcceptancesAlertDialog : DialogFragment() {
+class ReceiptAlertDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             builder
                 .setTitle(getString(R.string.attention))
-                .setMessage(getString(R.string.acceptance_message))
+                .setMessage(getString(R.string.receipt_message))
                 .setPositiveButton(getString(R.string.ok_btn)) { _, _ ->
-                    openAcceptancesNameFragment()
+                    openReceiptNameFragment()
                 }
                 .setNegativeButton(getString(R.string.cancel_btn)) { _, _ ->
                 }
@@ -24,11 +24,10 @@ class AcceptancesAlertDialog : DialogFragment() {
         } ?: throw IllegalStateException(getString(R.string.activity_warning))
     }
 
-    private fun openAcceptancesNameFragment() {
+    private fun openReceiptNameFragment() {
         findNavController()
             .navigate(
-                AcceptancesAlertDialogDirections
-                    .actionAcceptancesAlertDialogToAcceptanceNameFragment()
+                ReceiptAlertDialogDirections.actionReceiptAlertDialogToReceiptNameFragment()
             )
     }
 }
