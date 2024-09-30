@@ -8,14 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentEditSaleBinding
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.EditSaleFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.EditSaleFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class EditSaleFragment : Fragment() {
@@ -23,10 +23,9 @@ class EditSaleFragment : Fragment() {
     private var _binding: FragmentEditSaleBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: EditSaleFragmentViewModel by viewModels {
+        EditSaleFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 

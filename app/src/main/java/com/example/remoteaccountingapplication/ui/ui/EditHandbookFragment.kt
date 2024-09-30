@@ -5,14 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentEditHandbookBinding
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.EditHandbookFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.EditHandbookFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class EditHandbookFragment : Fragment() {
@@ -20,10 +20,9 @@ class EditHandbookFragment : Fragment() {
     private var _binding: FragmentEditHandbookBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: EditHandbookFragmentViewModel by viewModels {
+        EditHandbookFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
@@ -33,7 +32,7 @@ class EditHandbookFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentEditHandbookBinding.inflate(inflater, container, false)
         return binding.root
     }

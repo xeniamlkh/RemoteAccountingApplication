@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
@@ -16,18 +16,17 @@ import com.example.remoteaccountingapplication.databinding.FragmentNamesBinding
 import com.example.remoteaccountingapplication.ui.alertdialogs.DeleteAlertDialog
 import com.example.remoteaccountingapplication.ui.recyclerview.NamesRecyclerViewAdapter
 import com.example.remoteaccountingapplication.ui.recyclerview.OnMenuClickListener
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.NamesFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.NamesFragmentViewModelFactory
 
 class NamesFragment : Fragment(), OnMenuClickListener {
 
     private var _binding: FragmentNamesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: NamesFragmentViewModel by viewModels {
+        NamesFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
@@ -36,7 +35,7 @@ class NamesFragment : Fragment(), OnMenuClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNamesBinding.inflate(inflater, container, false)
         return binding.root
     }

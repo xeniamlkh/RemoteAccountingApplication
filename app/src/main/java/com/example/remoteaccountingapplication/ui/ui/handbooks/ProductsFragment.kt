@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
@@ -16,18 +16,17 @@ import com.example.remoteaccountingapplication.databinding.FragmentProductsBindi
 import com.example.remoteaccountingapplication.ui.alertdialogs.DeleteAlertDialog
 import com.example.remoteaccountingapplication.ui.recyclerview.OnMenuClickListener
 import com.example.remoteaccountingapplication.ui.recyclerview.ProductsRecyclerViewAdapter
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.ProductFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.ProductFragmentViewModelFactory
 
 class ProductsFragment : Fragment(), OnMenuClickListener {
 
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: ProductFragmentViewModel by viewModels {
+        ProductFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
@@ -36,7 +35,7 @@ class ProductsFragment : Fragment(), OnMenuClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         return binding.root
     }

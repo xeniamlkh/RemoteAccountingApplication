@@ -4,11 +4,11 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.DeleteAlertDialogViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.DeleteAlertDialogViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 private const val ARG_PARAM_TABLE = "table"
@@ -16,10 +16,9 @@ private const val ARG_PARAM_ID = "item_id"
 
 class DeleteAlertDialog : DialogFragment() {
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: DeleteAlertDialogViewModel by viewModels {
+        DeleteAlertDialogViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 

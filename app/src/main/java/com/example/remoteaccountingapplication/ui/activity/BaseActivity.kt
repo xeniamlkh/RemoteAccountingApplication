@@ -7,8 +7,6 @@ import android.os.Environment
 import androidx.activity.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter

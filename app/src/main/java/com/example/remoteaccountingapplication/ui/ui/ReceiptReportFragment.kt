@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentReceiptReportBinding
 import com.example.remoteaccountingapplication.ui.recyclerview.ReceiptRecyclerViewAdapter
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptReportFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptReportFragmentViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -20,10 +20,9 @@ class ReceiptReportFragment : Fragment(), DateListener {
     private var _binding: FragmentReceiptReportBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: ReceiptReportFragmentViewModel by viewModels {
+        ReceiptReportFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
@@ -35,7 +34,7 @@ class ReceiptReportFragment : Fragment(), DateListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentReceiptReportBinding.inflate(inflater, container, false)
         return binding.root
     }

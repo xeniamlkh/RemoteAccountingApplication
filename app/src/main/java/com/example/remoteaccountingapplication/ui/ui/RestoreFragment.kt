@@ -10,12 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.documentfile.provider.DocumentFile
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentRestoreBinding
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.RestoreFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.RestoreFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,10 +37,9 @@ class RestoreFragment : Fragment() {
     var saleTypesImported: Boolean = false
     var namesImported: Boolean = false
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: RestoreFragmentViewModel by viewModels {
+        RestoreFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
@@ -85,7 +84,7 @@ class RestoreFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRestoreBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -113,9 +112,8 @@ class RestoreFragment : Fragment() {
             binding.namesRows.text = number.toString()
         }
 
-        // !!!!!!!
         viewModel.getReceiptRowsNumber().observe(this.viewLifecycleOwner) { number ->
-            binding.receiptRows?.text = number.toString()
+            binding.receiptRows.text = number.toString()
         }
 
         binding.restoreSalesBtn.setOnClickListener {
@@ -138,7 +136,7 @@ class RestoreFragment : Fragment() {
             restoreNamesTable()
         }
 
-        binding.restoreReceiptBtn?.setOnClickListener {
+        binding.restoreReceiptBtn.setOnClickListener {
             restoreReceiptTable()
         }
     }
@@ -557,14 +555,14 @@ class RestoreFragment : Fragment() {
                         .show()
 
                     requireActivity().runOnUiThread {
-                        binding.receiptCheck?.visibility = View.VISIBLE
+                        binding.receiptCheck.visibility = View.VISIBLE
                     }
                 }
             }
         }
 
         viewModel.getReceiptRowsNumber().observe(this.viewLifecycleOwner) { number ->
-            binding.receiptRows?.text = number.toString()
+            binding.receiptRows.text = number.toString()
         }
 
     }

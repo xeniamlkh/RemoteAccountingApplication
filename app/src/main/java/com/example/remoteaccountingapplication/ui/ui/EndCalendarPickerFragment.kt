@@ -6,18 +6,17 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.EndCalendarPickerFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.EndCalendarPickerFragmentViewModelFactory
 
 class EndCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
+    private val viewModel: EndCalendarPickerFragmentViewModel by viewModels {
+        EndCalendarPickerFragmentViewModelFactory(
+            (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
@@ -27,7 +26,14 @@ class EndCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetLi
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        return DatePickerDialog(requireContext(), R.style.CustomDatePickerDialog,this, year, month, day)
+        return DatePickerDialog(
+            requireContext(),
+            R.style.CustomDatePickerDialog,
+            this,
+            year,
+            month,
+            day
+        )
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
