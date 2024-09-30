@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentBackupBinding
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.RemoteAccountingViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.BackupFragmentModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.BackupFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.FileOutputStream
@@ -24,11 +24,8 @@ class BackupFragment : Fragment() {
     private var _binding: FragmentBackupBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RemoteAccountingViewModel by activityViewModels {
-        RemoteAccountingViewModelFactory(
-            (activity?.application as RemoteAccountingApplication).repository,
-            activity?.application as RemoteAccountingApplication
-        )
+    private val viewModel: BackupFragmentViewModel by viewModels {
+        BackupFragmentModelFactory((activity?.application as RemoteAccountingApplication).repository)
     }
 
     private lateinit var absolutPath: String

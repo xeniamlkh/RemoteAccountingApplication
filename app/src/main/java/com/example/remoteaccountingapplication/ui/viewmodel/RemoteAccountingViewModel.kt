@@ -17,7 +17,6 @@ import com.example.remoteaccountingapplication.data.repository.RoomRepository
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class RemoteAccountingViewModel(private val repository: RoomRepository, application: Application) :
@@ -68,14 +67,6 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
 
     fun getListOfSalesByDate(startOfDay: Long, endOfDay: Long): LiveData<List<Sales>> {
         return repository.getListOfSalesByDate(startOfDay, endOfDay).asLiveData()
-    }
-
-    fun exportMonthSales(): LiveData<List<String>> {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE, -30)
-        val startDate = calendar.timeInMillis
-
-        return repository.exportMonthSalesCsv(startDate).asLiveData()
     }
 
     fun exportRangeSalesCsv(): LiveData<List<String>> {
@@ -461,32 +452,6 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
     fun getAcceptanceRowsNumber(): LiveData<Int> {
         return repository.getAcceptanceRowsNumber().asLiveData()
     }
-
-
-    fun dailyAllSalesBackUp(): LiveData<List<String>> {
-        return repository.dailyAllSalesBackUp().asLiveData()
-    }
-
-    fun dailyProductsBackUp(): LiveData<List<String>> {
-        return repository.dailyProductsBackUp().asLiveData()
-    }
-
-    fun dailyPaymentTypeBackUp(): LiveData<List<String>> {
-        return repository.dailyPaymentTypeBackUp().asLiveData()
-    }
-
-    fun dailySaleTypeBackUp(): LiveData<List<String>> {
-        return repository.dailySaleTypeBackUp().asLiveData()
-    }
-
-    fun dailyNamesBackUp(): LiveData<List<String>> {
-        return repository.dailyNamesBackUp().asLiveData()
-    }
-
-    fun dailyAcceptancesBackUpFlow(): LiveData<List<String>> {
-        return repository.dailyAcceptancesBackUpFlow().asLiveData()
-    }
-
 }
 
 class RemoteAccountingViewModelFactory(

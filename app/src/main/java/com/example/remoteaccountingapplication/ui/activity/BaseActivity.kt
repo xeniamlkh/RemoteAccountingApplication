@@ -16,14 +16,13 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.example.remoteaccountingapplication.ui.viewmodel.ActivityViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.ActivityViewModelFactory
 
 open class BaseActivity : AppCompatActivity() {
 
-    private val viewModel: RemoteAccountingViewModel by viewModels {
-        RemoteAccountingViewModelFactory(
-            (application as RemoteAccountingApplication).repository,
-            application as RemoteAccountingApplication
-        )
+    private val viewModel: ActivityViewModel by viewModels {
+        ActivityViewModelFactory((application as RemoteAccountingApplication).repository)
     }
 
     private lateinit var absolutPath: String
