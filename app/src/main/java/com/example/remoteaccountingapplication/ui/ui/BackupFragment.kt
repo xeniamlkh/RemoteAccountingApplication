@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentBackupBinding
-import com.example.remoteaccountingapplication.ui.viewmodel.BackupFragmentModelFactory
-import com.example.remoteaccountingapplication.ui.viewmodel.BackupFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.BackupModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.FileOutputStream
@@ -24,8 +24,8 @@ class BackupFragment : Fragment() {
     private var _binding: FragmentBackupBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: BackupFragmentViewModel by viewModels {
-        BackupFragmentModelFactory((activity?.application as RemoteAccountingApplication).repository)
+    private val viewModel: BackupViewModel by viewModels {
+        BackupModelFactory((activity?.application as RemoteAccountingApplication).repository)
     }
 
     private lateinit var absolutPath: String
@@ -36,7 +36,7 @@ class BackupFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBackupBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -269,7 +269,7 @@ class BackupFragment : Fragment() {
             }
         }
 
-        binding.receiptCheck?.visibility = View.VISIBLE
+        binding.receiptCheck.visibility = View.VISIBLE
     }
 
     private fun checkBackupDir() {

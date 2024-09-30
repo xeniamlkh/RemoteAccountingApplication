@@ -7,31 +7,7 @@ import androidx.lifecycle.asLiveData
 import com.example.remoteaccountingapplication.data.repository.RoomRepository
 import java.util.Calendar
 
-class ActivityViewModel(private val repository: RoomRepository) : ViewModel() {
-
-    fun dailyAllSalesBackUp(): LiveData<List<String>> {
-        return repository.dailyAllSalesBackUp().asLiveData()
-    }
-
-    fun dailyProductsBackUp(): LiveData<List<String>> {
-        return repository.dailyProductsBackUp().asLiveData()
-    }
-
-    fun dailyPaymentTypeBackUp(): LiveData<List<String>> {
-        return repository.dailyPaymentTypeBackUp().asLiveData()
-    }
-
-    fun dailySaleTypeBackUp(): LiveData<List<String>> {
-        return repository.dailySaleTypeBackUp().asLiveData()
-    }
-
-    fun dailyNamesBackUp(): LiveData<List<String>> {
-        return repository.dailyNamesBackUp().asLiveData()
-    }
-
-    fun dailyReceiptBackUpFlow(): LiveData<List<String>> {
-        return repository.dailyReceiptBackUpFlow().asLiveData()
-    }
+class ActivityViewModel(private val repository: RoomRepository) : BackupViewModel(repository) {
 
     fun exportMonthSales(): LiveData<List<String>> {
         val calendar = Calendar.getInstance()

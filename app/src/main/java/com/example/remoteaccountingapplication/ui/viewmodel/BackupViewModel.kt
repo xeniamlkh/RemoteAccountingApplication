@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.example.remoteaccountingapplication.data.repository.RoomRepository
 
-class BackupFragmentViewModel(private val repository: RoomRepository): ViewModel() {
+open class BackupViewModel(private val repository: RoomRepository): ViewModel() {
 
     fun dailyAllSalesBackUp(): LiveData<List<String>> {
         return repository.dailyAllSalesBackUp().asLiveData()
@@ -33,11 +33,11 @@ class BackupFragmentViewModel(private val repository: RoomRepository): ViewModel
     }
 }
 
-class BackupFragmentModelFactory(private val repository: RoomRepository) : ViewModelProvider.Factory {
+class BackupModelFactory(private val repository: RoomRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        if (modelClass.isAssignableFrom(BackupFragmentViewModel::class.java)) {
-            return BackupFragmentViewModel(repository) as T
+        if (modelClass.isAssignableFrom(BackupViewModel::class.java)) {
+            return BackupViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
