@@ -6,13 +6,12 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.HandbookItemBinding
-import com.example.remoteaccountingapplication.model.data.SaleType
+import com.example.remoteaccountingapplication.data.room.SaleType
 
 class SaleTypesRecyclerViewAdapter(
     private val saleTypes: List<SaleType>,
     private val menuClickListener: OnMenuClickListener
-) :
-    RecyclerView.Adapter<SaleTypesRecyclerViewAdapter.SaleTypeViewHolder>() {
+) : RecyclerView.Adapter<SaleTypesRecyclerViewAdapter.SaleTypeViewHolder>() {
 
     inner class SaleTypeViewHolder(binding: HandbookItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

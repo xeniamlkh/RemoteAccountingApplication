@@ -1,4 +1,4 @@
-package com.example.remoteaccountingapplication.model.data
+package com.example.remoteaccountingapplication.data.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

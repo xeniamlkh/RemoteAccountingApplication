@@ -1,11 +1,11 @@
-package com.example.remoteaccountingapplication.model.data
+package com.example.remoteaccountingapplication.data.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "acceptance")
-data class Acceptance(
+data class Receipt(
     @PrimaryKey(autoGenerate = true) var id: Int,
     @ColumnInfo val dateCalculation: Long,
     @ColumnInfo val date: String,

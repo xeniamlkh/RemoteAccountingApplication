@@ -1,17 +1,17 @@
-package com.example.remoteaccountingapplication.model.repository
+package com.example.remoteaccountingapplication.data.repository
 
-import com.example.remoteaccountingapplication.model.data.Acceptance
-import com.example.remoteaccountingapplication.model.data.AcceptanceDao
-import com.example.remoteaccountingapplication.model.data.Names
-import com.example.remoteaccountingapplication.model.data.NamesDao
-import com.example.remoteaccountingapplication.model.data.PaymentType
-import com.example.remoteaccountingapplication.model.data.PaymentTypeDao
-import com.example.remoteaccountingapplication.model.data.ProductsDao
-import com.example.remoteaccountingapplication.model.data.SalesDao
-import com.example.remoteaccountingapplication.model.data.Products
-import com.example.remoteaccountingapplication.model.data.SaleType
-import com.example.remoteaccountingapplication.model.data.SaleTypeDao
-import com.example.remoteaccountingapplication.model.data.Sales
+import com.example.remoteaccountingapplication.data.room.Receipt
+import com.example.remoteaccountingapplication.data.room.ReceiptDao
+import com.example.remoteaccountingapplication.data.room.Names
+import com.example.remoteaccountingapplication.data.room.NamesDao
+import com.example.remoteaccountingapplication.data.room.PaymentType
+import com.example.remoteaccountingapplication.data.room.PaymentTypeDao
+import com.example.remoteaccountingapplication.data.room.ProductsDao
+import com.example.remoteaccountingapplication.data.room.SalesDao
+import com.example.remoteaccountingapplication.data.room.Products
+import com.example.remoteaccountingapplication.data.room.SaleType
+import com.example.remoteaccountingapplication.data.room.SaleTypeDao
+import com.example.remoteaccountingapplication.data.room.Sales
 import kotlinx.coroutines.flow.Flow
 
 class RoomRepository(
@@ -20,9 +20,8 @@ class RoomRepository(
     private val namesDao: NamesDao,
     private val paymentTypeDao: PaymentTypeDao,
     private val saleTypeDao: SaleTypeDao,
-    private val acceptanceDao: AcceptanceDao
+    private val receiptDao: ReceiptDao
 ) {
-
 
     suspend fun insertSale(sale: Sales) {
         salesDao.insertSale(sale)
@@ -220,21 +219,20 @@ class RoomRepository(
     }
 
 
-    suspend fun insertAcceptProduct(acceptProduct: Acceptance) {
-        acceptanceDao.insertAcceptProduct(acceptProduct)
+    suspend fun insertAcceptProduct(acceptProduct: Receipt) {
+        receiptDao.insertAcceptProduct(acceptProduct)
     }
 
     fun getListOfAcceptancesByDate(
         startOfDay: Long,
         endOfDay: Long
-    ): Flow<List<Acceptance>> {
-        return acceptanceDao.getListOfAcceptancesByDate(startOfDay, endOfDay)
+    ): Flow<List<Receipt>> {
+        return receiptDao.getListOfAcceptancesByDate(startOfDay, endOfDay)
     }
 
     fun getAcceptanceRowsNumber(): Flow<Int> {
-        return acceptanceDao.getAcceptanceRowsNumber()
+        return receiptDao.getAcceptanceRowsNumber()
     }
-
 
     fun dailyAllSalesBackUp(): Flow<List<String>> {
         return salesDao.dailyAllSalesBackUp()
@@ -257,6 +255,6 @@ class RoomRepository(
     }
 
     fun dailyAcceptancesBackUpFlow(): Flow<List<String>> {
-        return acceptanceDao.dailyAcceptancesBackUpFlow()
+        return receiptDao.dailyAcceptancesBackUpFlow()
     }
 }

@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.HandbookItemBinding
-import com.example.remoteaccountingapplication.model.data.PaymentType
+import com.example.remoteaccountingapplication.data.room.PaymentType
 
 class PaymentTypesRecyclerViewAdapter(
     private val paymentTypes: List<PaymentType>,

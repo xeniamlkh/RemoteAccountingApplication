@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.AcceptanceItemBinding
-import com.example.remoteaccountingapplication.model.data.Acceptance
+import com.example.remoteaccountingapplication.data.room.Receipt
 
 class AcceptanceRecyclerViewAdapter(
-    private val acceptances: List<Acceptance>
+    private val receipts: List<Receipt>
 ) : RecyclerView.Adapter<AcceptanceRecyclerViewAdapter.AcceptanceViewHolder>() {
 
     inner class AcceptanceViewHolder(binding: AcceptanceItemBinding) :
@@ -35,11 +35,11 @@ class AcceptanceRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return acceptances.size
+        return receipts.size
     }
 
     override fun onBindViewHolder(holder: AcceptanceViewHolder, position: Int) {
-        val item = acceptances[position]
+        val item = receipts[position]
         holder.title.text = item.product
         holder.price.text = item.price.toString()
         holder.remains.text = item.number.toString()

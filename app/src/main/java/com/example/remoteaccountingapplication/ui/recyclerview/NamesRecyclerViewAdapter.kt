@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.HandbookItemBinding
-import com.example.remoteaccountingapplication.model.data.Names
+import com.example.remoteaccountingapplication.data.room.Names
 
 class NamesRecyclerViewAdapter(
     private val names: List<Names>,

@@ -1,4 +1,4 @@
-package com.example.remoteaccountingapplication.model.data
+package com.example.remoteaccountingapplication.data.room
 
 import androidx.room.Dao
 import androidx.room.Insert

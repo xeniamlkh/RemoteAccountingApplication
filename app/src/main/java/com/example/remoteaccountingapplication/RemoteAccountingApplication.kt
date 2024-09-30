@@ -1,8 +1,8 @@
 package com.example.remoteaccountingapplication
 
 import android.app.Application
-import com.example.remoteaccountingapplication.model.data.RemoteAccountingDatabase
-import com.example.remoteaccountingapplication.model.repository.RoomRepository
+import com.example.remoteaccountingapplication.data.room.RemoteAccountingDatabase
+import com.example.remoteaccountingapplication.data.repository.RoomRepository
 
 class RemoteAccountingApplication : Application() {
 

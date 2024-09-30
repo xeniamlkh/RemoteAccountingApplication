@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.remoteaccountingapplication.model.data.Acceptance
-import com.example.remoteaccountingapplication.model.data.Names
-import com.example.remoteaccountingapplication.model.data.PaymentType
-import com.example.remoteaccountingapplication.model.data.Products
-import com.example.remoteaccountingapplication.model.data.SaleType
-import com.example.remoteaccountingapplication.model.data.Sales
-import com.example.remoteaccountingapplication.model.repository.RoomRepository
+import com.example.remoteaccountingapplication.data.room.Receipt
+import com.example.remoteaccountingapplication.data.room.Names
+import com.example.remoteaccountingapplication.data.room.PaymentType
+import com.example.remoteaccountingapplication.data.room.Products
+import com.example.remoteaccountingapplication.data.room.SaleType
+import com.example.remoteaccountingapplication.data.room.Sales
+import com.example.remoteaccountingapplication.data.repository.RoomRepository
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -79,7 +79,7 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
     }
 
     fun exportRangeSalesCsv(): LiveData<List<String>> {
-        return repository.exportRangeSalesCsv(startDateVM!!, endDateVM!!).asLiveData()
+        return repository.exportRangeSalesCsv(startDateVM!!, endDateVM!!).asLiveData() // null
     }
 
     fun deleteSaleItemById(itemId: Int) {
@@ -89,7 +89,7 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
     }
 
     fun getSaleItemById(itemId: Int): LiveData<Sales> {
-        return repository.getSaleItemById(itemId).asLiveData()
+        return repository.getSaleItemById(itemId).asLiveData() // map + model
     }
 
     fun updateSaleItemById(
@@ -168,7 +168,12 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
         }
     }
 
-    private fun updateProductByProduct(product: String, price: Double, remains: Int, physical: Boolean) {
+    private fun updateProductByProduct(
+        product: String,
+        price: Double,
+        remains: Int,
+        physical: Boolean
+    ) {
         viewModelScope.launch {
             repository.updateProductByProduct(product, price, remains, physical)
         }
@@ -429,8 +434,8 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
         number: Int
     ) {
 
-        val acceptance =
-            Acceptance(
+        val receipt =
+            Receipt(
                 0,
                 dateCalc,
                 date,
@@ -439,17 +444,17 @@ class RemoteAccountingViewModel(private val repository: RoomRepository, applicat
                 price,
                 number
             )
-        insertAcceptProduct(acceptance)
+        insertAcceptProduct(receipt)
     }
 
-    private fun insertAcceptProduct(acceptProduct: Acceptance) {
+    private fun insertAcceptProduct(acceptProduct: Receipt) {
         viewModelScope.launch { repository.insertAcceptProduct(acceptProduct) }
     }
 
     fun getListOfAcceptancesByDate(
         startOfDay: Long,
         endOfDay: Long
-    ): LiveData<List<Acceptance>> {
+    ): LiveData<List<Receipt>> {
         return repository.getListOfAcceptancesByDate(startOfDay, endOfDay).asLiveData()
     }
 
