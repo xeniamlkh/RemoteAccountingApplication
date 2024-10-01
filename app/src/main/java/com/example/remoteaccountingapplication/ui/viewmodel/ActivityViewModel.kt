@@ -7,31 +7,31 @@ import androidx.lifecycle.asLiveData
 import com.example.remoteaccountingapplication.data.repository.RoomRepository
 import java.util.Calendar
 
-class ActivityViewModel(private val repository: RoomRepository) : ViewModel() {
+class ActivityViewModel(private val repository: RoomRepository) : BackupViewModel(repository) {
 
-    fun dailyAllSalesBackUp(): LiveData<List<String>> {
-        return repository.dailyAllSalesBackUp().asLiveData()
-    }
-
-    fun dailyProductsBackUp(): LiveData<List<String>> {
-        return repository.dailyProductsBackUp().asLiveData()
-    }
-
-    fun dailyPaymentTypeBackUp(): LiveData<List<String>> {
-        return repository.dailyPaymentTypeBackUp().asLiveData()
-    }
-
-    fun dailySaleTypeBackUp(): LiveData<List<String>> {
-        return repository.dailySaleTypeBackUp().asLiveData()
-    }
-
-    fun dailyNamesBackUp(): LiveData<List<String>> {
-        return repository.dailyNamesBackUp().asLiveData()
-    }
-
-    fun dailyReceiptBackUpFlow(): LiveData<List<String>> {
-        return repository.dailyReceiptBackUpFlow().asLiveData()
-    }
+//    fun dailyAllSalesBackUp(): LiveData<List<String>> {
+//        return repository.dailyAllSalesBackUp().asLiveData()
+//    }
+//
+//    fun dailyProductsBackUp(): LiveData<List<String>> {
+//        return repository.dailyProductsBackUp().asLiveData()
+//    }
+//
+//    fun dailyPaymentTypeBackUp(): LiveData<List<String>> {
+//        return repository.dailyPaymentTypeBackUp().asLiveData()
+//    }
+//
+//    fun dailySaleTypeBackUp(): LiveData<List<String>> {
+//        return repository.dailySaleTypeBackUp().asLiveData()
+//    }
+//
+//    fun dailyNamesBackUp(): LiveData<List<String>> {
+//        return repository.dailyNamesBackUp().asLiveData()
+//    }
+//
+//    fun dailyReceiptBackUpFlow(): LiveData<List<String>> {
+//        return repository.dailyReceiptBackUpFlow().asLiveData()
+//    }
 
     fun exportMonthSales(): LiveData<List<String>> {
         val calendar = Calendar.getInstance()
