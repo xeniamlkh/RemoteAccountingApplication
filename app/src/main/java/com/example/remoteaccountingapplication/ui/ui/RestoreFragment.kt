@@ -29,13 +29,15 @@ class RestoreFragment : Fragment() {
     private var _binding: FragmentRestoreBinding? = null
     private val binding get() = _binding!!
 
+//    private lateinit var restoreBackup: RestoreBackup
+
     private var currentRequestCode: Int = 0
 
-    var salesImported: Boolean = false
-    var productsImported: Boolean = false
-    var paymentTypesImported: Boolean = false
-    var saleTypesImported: Boolean = false
-    var namesImported: Boolean = false
+    private var salesImported: Boolean = false
+    private var productsImported: Boolean = false
+    private var paymentTypesImported: Boolean = false
+    private var saleTypesImported: Boolean = false
+    private var namesImported: Boolean = false
 
     private val viewModel: RestoreFragmentViewModel by viewModels {
         RestoreFragmentViewModelFactory(
@@ -91,6 +93,8 @@ class RestoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        restoreBackup = RestoreBackup(viewModel)
 
         viewModel.getSalesRowsNumber().observe(this.viewLifecycleOwner) { number ->
             binding.salesRows.text = number.toString()
@@ -197,11 +201,9 @@ class RestoreFragment : Fragment() {
 
     private fun importSalesCsv(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
 
             if (fileName != null) {
-
                 if (!fileName.contains("Sales")) {
                     Snackbar
                         .make(
@@ -213,6 +215,8 @@ class RestoreFragment : Fragment() {
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
                     val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
+
+                    //restoreBackup.importSalesCsv(bufferedReader), move a process of reading lines?
 
                     bufferedReader.useLines { lines ->
                         lines.forEach { line ->
@@ -253,6 +257,7 @@ class RestoreFragment : Fragment() {
                             }
                         }
                     }
+
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
@@ -347,7 +352,7 @@ class RestoreFragment : Fragment() {
 
             if (fileName != null) {
 
-                if (!fileName.contains("Payment Types")) {
+                if (!fileName.contains("PaymentTypes")) {
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
@@ -399,7 +404,7 @@ class RestoreFragment : Fragment() {
 
             if (fileName != null) {
 
-                if (!fileName.contains("Sale Types")) {
+                if (!fileName.contains("SaleTypes")) {
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
