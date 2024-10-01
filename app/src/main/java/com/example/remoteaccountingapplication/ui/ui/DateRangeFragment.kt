@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentDateRangeBinding
@@ -26,7 +26,7 @@ class DateRangeFragment : Fragment() {
     private var _binding: FragmentDateRangeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: DateRangeFragmentViewModel by viewModels {
+    private val viewModel: DateRangeFragmentViewModel by activityViewModels {
         DateRangeFragmentViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
