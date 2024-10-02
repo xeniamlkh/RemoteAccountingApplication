@@ -6,16 +6,16 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.ui.viewmodel.StartCalendarPickerFragmentViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.StartCalendarPickerFragmentViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModelFactory
 
 class StartCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private val viewModel: StartCalendarPickerFragmentViewModel by viewModels {
-        StartCalendarPickerFragmentViewModelFactory(
+    private val viewModel: ExportingCsvViewModel by activityViewModels {
+        ExportingCsvViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
     }
