@@ -81,7 +81,7 @@
     <string name="attention">ВНИМАНИЕ!</string>
     <string name="receipt_message">Будьте внимательны при получении товаров и оформлении приёмки! \n\nПосле внесения товара в приёмку его нельзя удалить или отреактировать \n\nЕсли вы ошиблись в количестве получаемого товара, оформите повторную приёмку с таким же названием товара, но с отрицательным количеством</string>
     <string name="permissions_granted">Разрешения предоставлены</string>
-    <string name="csv_title">Дата,Товар,Цена,Количество,Сумма,Тип оплаты,Тип продажи,ФИО,Примечание\n</string>
+    <string name="csv_header">Дата,Товар,Цена,Количество,Сумма,Тип оплаты,Тип продажи,ФИО,Примечание\n</string>
     <string name="send_csv">Переслать CSV</string>
     <string name="sales_csv_backup_title">%1$s Sales.csv</string>
     <string name="products_csv_backup_title">%1$s Products.csv</string>
@@ -148,4 +148,11 @@
     <string name="sale_saved">Продажа успешно сохранена</string>
     <string name="fill_in_dates">Заполните даты начала и окончания!</string>
     <string name="receiptalertdialog">ReceiptAlertDialog</string>
+    <string name="text_csv">text/csv</string>
+    <string name="dd_mm_yyyy">dd.MM.yyyy</string>
+    <string name="yyyy_mm_dd">yyyy.MM.dd</string>
+    <string name="fileprovider">com.example.remoteaccountingapplication.fileprovider</string>
+    <string name="utf_16">UTF-16</string>
+    <string name="calendar_picker">CALENDAR_PICKER</string>
+    <string name="rationale_tag">RATIONALE</string>
 </resources>

@@ -7,10 +7,12 @@ import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.domain.Backup
 import com.example.remoteaccountingapplication.domain.Csv
 import com.example.remoteaccountingapplication.ui.getTodayDateY
+import com.example.remoteaccountingapplication.ui.shareCSVFile
 import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModelFactory
 import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModelFactory
+import java.io.File
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -68,10 +70,28 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    fun createAndShareCsv(csvFileTitle: String) {
+        val csvFile = createCsvReport(csvFileTitle)
+        shareCsvReport(csvFile)
+    }
 
-    // sharing context?
-    fun createAndShareCsv() {
-        // csv = Csv(this, exportingCsvViewModel, this)
-        // csv.createAndShareCsv(null, null)
+    private fun createCsvReport(csvFileTitle: String): File {
+        csv = Csv()
+
+        val csvHeader = getString(R.string.csv_header)
+        val errorMessage = getString(R.string.external_storage_not_mounted)
+        val charsetName = getString(R.string.utf_16)
+
+        val csvFile = csv.createCsvFile(csvFileTitle, errorMessage)
+
+        exportingCsvViewModel.exportMonthSales().observe(this) { exportedSales ->
+            csv.writeCsvFile(exportedSales, csvFile, csvHeader, charsetName)
+        }
+
+        return csvFile
+    }
+
+    private fun shareCsvReport(csvFile: File) {
+        this.shareCSVFile(csvFile)
     }
 }

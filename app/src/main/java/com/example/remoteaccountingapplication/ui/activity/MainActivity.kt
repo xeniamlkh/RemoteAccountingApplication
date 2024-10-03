@@ -16,9 +16,9 @@ import androidx.core.content.ContextCompat
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.ui.alertdialogs.PermissionRationaleDialog
 import com.example.remoteaccountingapplication.ui.alertdialogs.PermissionRationaleDialogListener
+import com.example.remoteaccountingapplication.ui.getTodayDateD
 import com.google.android.material.snackbar.Snackbar
 
-//AppCompatActivity()
 class MainActivity : BaseActivity(), PermissionRationaleDialogListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -102,7 +102,8 @@ class MainActivity : BaseActivity(), PermissionRationaleDialogListener {
     }
 
     private fun showExplanation() {
-        PermissionRationaleDialog(this).show(supportFragmentManager, "RATIONALE")
+        PermissionRationaleDialog(this).show(supportFragmentManager,
+            getString(R.string.rationale_tag))
     }
 
     override fun callPermissionLauncher() {
@@ -126,7 +127,7 @@ class MainActivity : BaseActivity(), PermissionRationaleDialogListener {
             }
 
             R.id.thirty_btn -> {
-                createAndShareCsv()
+                createAndShareCsv(getString(R.string.csv_title_date, this.getTodayDateD()))
                 true
             }
 
