@@ -74,7 +74,7 @@ class ProductsFragment : Fragment(), OnMenuClickListener {
                                     .actionProductsFragmentToEditHandbookFragment(
                                         2,
                                         itemId,
-                                        getString(R.string.products_edit_dynamic_title)
+                                        getString(R.string.label_fragment_edit_handbook)
                                     )
                             )
                         true

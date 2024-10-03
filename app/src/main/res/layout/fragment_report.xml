@@ -86,7 +86,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:textSize="18sp"
-            tools:text="Итого за день, руб. :" />
+            tools:text="@string/total_text" />
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView

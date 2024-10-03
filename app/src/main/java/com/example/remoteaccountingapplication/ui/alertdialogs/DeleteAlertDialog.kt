@@ -37,7 +37,7 @@ class DeleteAlertDialog : DialogFragment() {
             builder
                 .setTitle(getString(R.string.attention))
                 .setMessage(getString(R.string.delete_message))
-                .setPositiveButton(getString(R.string.delete_btn)) { _, _ ->
+                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                     if (itemId != null) {
                         when (tableId) {
                             1 -> deleteSaleById(itemId!!)

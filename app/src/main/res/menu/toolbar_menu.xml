@@ -10,7 +10,7 @@
             <item
                 android:id="@+id/reportFragment"
                 android:title="@string/report" />
-            <item android:title="@string/receipt">
+            <item android:title="@string/label_fragment_receipt">
                 <menu>
                     <item
                         android:id="@+id/receiptAlertDialog"
@@ -47,14 +47,14 @@
 
                 </menu>
             </item>
-            <item android:title="@string/settings">
+            <item android:title="@string/fragment_settings">
                 <menu>
                     <item
                         android:id="@+id/backupFragment"
-                        android:title="@string/backup" />
+                        android:title="@string/label_fragment_backup" />
                     <item
                         android:id="@+id/restoreFragment"
-                        android:title="@string/restore" />
+                        android:title="@string/label_fragment_restore" />
                 </menu>
             </item>
         </menu>

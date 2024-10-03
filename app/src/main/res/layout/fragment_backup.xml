@@ -61,7 +61,7 @@
         style="@style/ButtonStyleSize13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/backup"
+        android:text="@string/label_fragment_backup"
         app:layout_constraintBottom_toTopOf="@id/table_title"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
