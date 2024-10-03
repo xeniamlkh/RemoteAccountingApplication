@@ -1,7 +1,6 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,7 @@ import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-class BackupFragment : Fragment() {
-
-    private var _binding: FragmentBackupBinding? = null
-    private val binding get() = _binding!!
+class BackupFragment : BaseFragment<FragmentBackupBinding>() {
 
     private val viewModel: BackupViewModel by viewModels {
         BackupViewModelFactory((activity?.application as RemoteAccountingApplication).repository)
@@ -26,12 +22,11 @@ class BackupFragment : Fragment() {
 
     private lateinit var backup: Backup
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentBackupBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentBackupBinding {
+        return FragmentBackupBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,8 +52,10 @@ class BackupFragment : Fragment() {
             }
             binding.productsCheck.visibility = View.VISIBLE
 
-            val csvPaymentTypesTitle = getString(R.string.payment_types_csv_backup_title, todayDateY)
-            val csvPaymentTypesFile = backup.createTodayBackupFile(todayBackupDir, csvPaymentTypesTitle)
+            val csvPaymentTypesTitle =
+                getString(R.string.payment_types_csv_backup_title, todayDateY)
+            val csvPaymentTypesFile =
+                backup.createTodayBackupFile(todayBackupDir, csvPaymentTypesTitle)
             viewModel.dailyPaymentTypeBackUp().observe(requireActivity()) { allPaymentTypes ->
                 backup.writeBackup(allPaymentTypes, csvPaymentTypesFile)
             }
@@ -93,10 +90,5 @@ class BackupFragment : Fragment() {
                 )
                 .show()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

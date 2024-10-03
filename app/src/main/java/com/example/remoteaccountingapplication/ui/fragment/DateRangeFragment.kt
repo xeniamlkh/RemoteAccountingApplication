@@ -1,7 +1,6 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +15,7 @@ import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewMode
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 
-class DateRangeFragment : Fragment() {
-
-    private var _binding: FragmentDateRangeBinding? = null
-    private val binding get() = _binding!!
+class DateRangeFragment : BaseFragment<FragmentDateRangeBinding>() {
 
     private val viewModel: ExportingCsvViewModel by activityViewModels {
         ExportingCsvViewModelFactory(
@@ -32,12 +28,11 @@ class DateRangeFragment : Fragment() {
     private var startDateHeader: String = ""
     private var endDateHeader: String = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDateRangeBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentDateRangeBinding {
+        return FragmentDateRangeBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,10 +111,4 @@ class DateRangeFragment : Fragment() {
     private fun shareCsvReport(csvFile: File) {
         requireContext().shareCSVFile(csvFile)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

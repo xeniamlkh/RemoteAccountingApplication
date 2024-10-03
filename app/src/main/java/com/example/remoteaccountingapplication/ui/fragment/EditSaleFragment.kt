@@ -1,9 +1,8 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +17,7 @@ import com.example.remoteaccountingapplication.ui.viewmodel.EditSaleFragmentView
 import com.example.remoteaccountingapplication.ui.viewmodel.EditSaleFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-class EditSaleFragment : Fragment() {
-
-    private var _binding: FragmentEditSaleBinding? = null
-    private val binding get() = _binding!!
+class EditSaleFragment : BaseFragment<FragmentEditSaleBinding>() {
 
     private val viewModel: EditSaleFragmentViewModel by viewModels {
         EditSaleFragmentViewModelFactory(
@@ -37,12 +33,11 @@ class EditSaleFragment : Fragment() {
     private var restoredRemains: Int = 0
     private var currentPrice: Double = 0.0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentEditSaleBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentEditSaleBinding {
+        return FragmentEditSaleBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -315,10 +310,5 @@ class EditSaleFragment : Fragment() {
         bundle.putDouble("currentPrice", currentPrice)
 
         outState.putBundle("EditSaleBundle", bundle)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

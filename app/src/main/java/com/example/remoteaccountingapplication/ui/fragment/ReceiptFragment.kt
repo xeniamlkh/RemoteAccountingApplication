@@ -1,9 +1,8 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class ReceiptFragment : Fragment() {
-
-    private var _binding: FragmentReceiptBinding? = null
-    private val binding get() = _binding!!
+class ReceiptFragment : BaseFragment<FragmentReceiptBinding>() {
 
     private val viewModel: ReceiptFragmentViewModel by viewModels {
         ReceiptFragmentViewModelFactory(
@@ -40,12 +36,11 @@ class ReceiptFragment : Fragment() {
     private var currentRemains: Int = 0
     private var currentDay: Int = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentReceiptBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentReceiptBinding {
+        return FragmentReceiptBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -305,10 +300,5 @@ class ReceiptFragment : Fragment() {
         bundle.putBoolean("flagExist", flagExist)
 
         outState.putBundle("receiptFragmentBundle", bundle)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

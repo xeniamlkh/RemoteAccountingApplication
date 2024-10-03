@@ -1,7 +1,6 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,7 @@ import com.example.remoteaccountingapplication.ui.viewmodel.EditHandbookFragment
 import com.example.remoteaccountingapplication.ui.viewmodel.EditHandbookFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-class EditHandbookFragment : Fragment() {
-
-    private var _binding: FragmentEditHandbookBinding? = null
-    private val binding get() = _binding!!
+class EditHandbookFragment : BaseFragment<FragmentEditHandbookBinding>() {
 
     private val viewModel: EditHandbookFragmentViewModel by viewModels {
         EditHandbookFragmentViewModelFactory(
@@ -29,12 +25,11 @@ class EditHandbookFragment : Fragment() {
     private val args: EditHandbookFragmentArgs by navArgs()
     private var physicalProduct: Boolean = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentEditHandbookBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentEditHandbookBinding {
+        return FragmentEditHandbookBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -245,10 +240,5 @@ class EditHandbookFragment : Fragment() {
                 )
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -1,7 +1,6 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class ReceiptReportFragment : Fragment(), DateListener {
-
-    private var _binding: FragmentReceiptReportBinding? = null
-    private val binding get() = _binding!!
+class ReceiptReportFragment : BaseFragment<FragmentReceiptReportBinding>(), DateListener {
 
     private val viewModel: ReceiptReportFragmentViewModel by viewModels {
         ReceiptReportFragmentViewModelFactory(
@@ -31,12 +27,11 @@ class ReceiptReportFragment : Fragment(), DateListener {
     private var currentDay: Int = 0
     private val simpleTodayDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentReceiptReportBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentReceiptReportBinding {
+        return FragmentReceiptReportBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,7 +92,6 @@ class ReceiptReportFragment : Fragment(), DateListener {
     }
 
     private fun getListOfReceiptOfGoods(startOfToday: Long, endOfToday: Long) {
-
         viewModel.getListOfReceiptByDate(startOfToday, endOfToday)
             .observe(this.viewLifecycleOwner) { receiptList ->
                 adapter = ReceiptRecyclerViewAdapter(receiptList)

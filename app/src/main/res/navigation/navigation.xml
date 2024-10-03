@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.InsertFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.InsertFragment"
         android:label="@string/label_fragment_insert"
         tools:layout="@layout/fragment_insert"></fragment>
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.ReportFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.ReportFragment"
         android:label="@string/label_fragment_report"
         tools:layout="@layout/fragment_report">
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.ProductsFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.handbooks.ProductsFragment"
         android:label="@string/label_fragment_products"
         tools:layout="@layout/fragment_products" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/namesFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.NamesFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.handbooks.NamesFragment"
         android:label="@string/label_fragment_names"
         tools:layout="@layout/fragment_names" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/paymentTypesFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.PaymentTypesFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.handbooks.PaymentTypesFragment"
         android:label="@string/label_fragment_payment_types"
         tools:layout="@layout/fragment_payment_types" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/saleTypesFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.handbooks.SaleTypesFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.handbooks.SaleTypesFragment"
         android:label="@string/label_fragment_sale_types"
         tools:layout="@layout/fragment_sale_types" >
         <action
@@ -57,12 +57,12 @@
     </fragment>
     <fragment
         android:id="@+id/dateRangeFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.DateRangeFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.DateRangeFragment"
         android:label="@string/label_fragment_date_range"
         tools:layout="@layout/fragment_date_range" />
     <fragment
         android:id="@+id/editSaleFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.EditSaleFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.EditSaleFragment"
         android:label="@string/label_fragment_edit_sale"
         tools:layout="@layout/fragment_edit_sale">
         <argument
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/editHandbookFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.EditHandbookFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.EditHandbookFragment"
         android:label="{dynamicTitle}"
         tools:layout="@layout/fragment_edit_handbook">
         <action
@@ -109,17 +109,17 @@
     </fragment>
     <fragment
         android:id="@+id/backupFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.BackupFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.BackupFragment"
         android:label="@string/label_fragment_backup"
         tools:layout="@layout/fragment_backup" />
     <fragment
         android:id="@+id/restoreFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.RestoreFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.RestoreFragment"
         android:label="@string/label_fragment_restore"
         tools:layout="@layout/fragment_restore" />
     <fragment
         android:id="@+id/receiptFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.ReceiptFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.ReceiptFragment"
         android:label="@string/label_fragment_receipt"
         tools:layout="@layout/fragment_receipt">
         <action
@@ -135,7 +135,7 @@
     </fragment>
     <fragment
         android:id="@+id/receiptNameFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.ReceiptNameFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.ReceiptNameFragment"
         android:label="@string/label_fragment_receipt_name"
         tools:layout="@layout/fragment_receipt_name">
         <action
@@ -145,7 +145,7 @@
     </fragment>
     <fragment
         android:id="@+id/receiptReportFragment"
-        android:name="com.example.remoteaccountingapplication.ui.ui.ReceiptReportFragment"
+        android:name="com.example.remoteaccountingapplication.ui.fragment.ReceiptReportFragment"
         android:label="@string/fragment_receipt_report"
         tools:layout="@layout/fragment_receipt_report">
         <action

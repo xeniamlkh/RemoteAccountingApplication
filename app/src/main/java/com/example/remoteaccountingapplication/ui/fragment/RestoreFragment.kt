@@ -1,10 +1,9 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,10 +23,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.NumberFormatException
 
-class RestoreFragment : Fragment() {
-
-    private var _binding: FragmentRestoreBinding? = null
-    private val binding get() = _binding!!
+class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
 //    private lateinit var restoreBackup: RestoreBackup
 
@@ -83,12 +79,11 @@ class RestoreFragment : Fragment() {
             }
         }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRestoreBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentRestoreBinding {
+        return FragmentRestoreBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -580,8 +575,6 @@ class RestoreFragment : Fragment() {
         paymentTypesImported = false
         saleTypesImported = false
         namesImported = false
-
-        _binding = null
     }
 
     companion object {

@@ -1,8 +1,7 @@
-package com.example.remoteaccountingapplication.ui.ui.handbooks
+package com.example.remoteaccountingapplication.ui.fragment.handbooks
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -12,46 +11,38 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.databinding.FragmentNamesBinding
+import com.example.remoteaccountingapplication.databinding.FragmentPaymentTypesBinding
 import com.example.remoteaccountingapplication.ui.alertdialogs.DeleteAlertDialog
-import com.example.remoteaccountingapplication.ui.recyclerview.NamesRecyclerViewAdapter
+import com.example.remoteaccountingapplication.ui.fragment.BaseFragment
 import com.example.remoteaccountingapplication.ui.recyclerview.OnMenuClickListener
-import com.example.remoteaccountingapplication.ui.viewmodel.NamesFragmentViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.NamesFragmentViewModelFactory
+import com.example.remoteaccountingapplication.ui.recyclerview.PaymentTypesRecyclerViewAdapter
+import com.example.remoteaccountingapplication.ui.viewmodel.PaymentTypesFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.PaymentTypesFragmentViewModelFactory
 
-class NamesFragment : Fragment(), OnMenuClickListener {
+class PaymentTypesFragment : BaseFragment<FragmentPaymentTypesBinding>(), OnMenuClickListener {
 
-    private var _binding: FragmentNamesBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: NamesFragmentViewModel by viewModels {
-        NamesFragmentViewModelFactory(
+    private val viewModel: PaymentTypesFragmentViewModel by viewModels {
+        PaymentTypesFragmentViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
-    private lateinit var adapter: NamesRecyclerViewAdapter
+    private lateinit var adapter: PaymentTypesRecyclerViewAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNamesBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentPaymentTypesBinding {
+        return FragmentPaymentTypesBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getNames().observe(this.viewLifecycleOwner) { namesList ->
-            adapter = NamesRecyclerViewAdapter(namesList, this)
-            binding.recyclerViewNames.adapter = adapter
+        viewModel.getPaymentTypes().observe(this.viewLifecycleOwner) { typesList ->
+            adapter = PaymentTypesRecyclerViewAdapter(typesList, this)
+            binding.recyclerViewTypes.adapter = adapter
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onMenuClick(menuView: View, itemId: Int) {
@@ -66,7 +57,7 @@ class NamesFragment : Fragment(), OnMenuClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 return when (item?.itemId) {
                     R.id.delete_btn -> {
-                        DeleteAlertDialog.newInstance(5, itemId)
+                        DeleteAlertDialog.newInstance(3, itemId)
                             .show(parentFragmentManager, "DELETE")
                         true
                     }
@@ -75,11 +66,11 @@ class NamesFragment : Fragment(), OnMenuClickListener {
                         view
                             ?.findNavController()
                             ?.navigate(
-                                NamesFragmentDirections
-                                    .actionNamesFragmentToEditHandbookFragment(
-                                        5,
+                                PaymentTypesFragmentDirections
+                                    .actionPaymentTypesFragmentToEditHandbookFragment(
+                                        3,
                                         itemId,
-                                        getString(R.string.name_edit_dynamic_title)
+                                        getString(R.string.payment_types_edit_dynamic_title)
                                     )
                             )
                         true

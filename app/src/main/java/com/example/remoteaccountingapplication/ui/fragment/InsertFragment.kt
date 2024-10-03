@@ -1,9 +1,8 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class InsertFragment : Fragment() {
-
-    private var _binding: FragmentInsertBinding? = null
-    private val binding get() = _binding!!
+class InsertFragment : BaseFragment<FragmentInsertBinding>() {
 
     private val viewModel: InsertFragmentViewModel by viewModels {
         InsertFragmentViewModelFactory(
@@ -35,12 +31,11 @@ class InsertFragment : Fragment() {
     private var currentRemains: Int = 0
     private var physicalProduct: Boolean = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentInsertBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentInsertBinding {
+        return FragmentInsertBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -380,10 +375,4 @@ class InsertFragment : Fragment() {
 
         outState.putBundle("insertFragmentBundle", bundle)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

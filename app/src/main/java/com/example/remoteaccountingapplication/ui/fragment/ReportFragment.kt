@@ -1,8 +1,7 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -22,10 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class ReportFragment : Fragment(), DateListener, OnMenuClickListener {
-
-    private var _binding: FragmentReportBinding? = null
-    private val binding get() = _binding!!
+class ReportFragment : BaseFragment<FragmentReportBinding>(), DateListener, OnMenuClickListener {
 
     private val viewModel: ReportFragmentViewModel by viewModels {
         ReportFragmentViewModelFactory(
@@ -38,12 +34,11 @@ class ReportFragment : Fragment(), DateListener, OnMenuClickListener {
     private var currentDay: Int = 0
     private val simpleTodayDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentReportBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentReportBinding {
+        return FragmentReportBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -161,10 +156,4 @@ class ReportFragment : Fragment(), DateListener, OnMenuClickListener {
         })
         popupMenu.show()
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

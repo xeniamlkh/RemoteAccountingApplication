@@ -1,4 +1,4 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -12,7 +12,7 @@ import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModelFactory
 
-class EndCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+class StartCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private val viewModel: ExportingCsvViewModel by activityViewModels {
         ExportingCsvViewModelFactory(
@@ -27,12 +27,8 @@ class EndCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetLi
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         return DatePickerDialog(
-            requireContext(),
-            R.style.CustomDatePickerDialog,
-            this,
-            year,
-            month,
-            day
+            requireContext(), R.style.CustomDatePickerDialog,
+            this, year, month, day
         )
     }
 
@@ -41,7 +37,7 @@ class EndCalendarPickerFragment : DialogFragment(), DatePickerDialog.OnDateSetLi
         date.set(year, month, dayOfMonth)
         val dateMilliseconds = date.timeInMillis
 
-        viewModel.setEndDate(dateMilliseconds)
+        viewModel.setStartDate(dateMilliseconds)
     }
 
 }

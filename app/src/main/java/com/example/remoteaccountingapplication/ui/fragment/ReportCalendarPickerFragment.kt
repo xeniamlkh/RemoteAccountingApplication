@@ -1,4 +1,4 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.app.DatePickerDialog
 import android.app.Dialog

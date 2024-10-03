@@ -1,4 +1,4 @@
-package com.example.remoteaccountingapplication.ui.ui.handbooks
+package com.example.remoteaccountingapplication.ui.fragment.handbooks
 
 import android.os.Build
 import android.os.Bundle
@@ -7,45 +7,41 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
-import com.example.remoteaccountingapplication.databinding.FragmentProductsBinding
+import com.example.remoteaccountingapplication.databinding.FragmentSaleTypesBinding
 import com.example.remoteaccountingapplication.ui.alertdialogs.DeleteAlertDialog
+import com.example.remoteaccountingapplication.ui.fragment.BaseFragment
 import com.example.remoteaccountingapplication.ui.recyclerview.OnMenuClickListener
-import com.example.remoteaccountingapplication.ui.recyclerview.ProductsRecyclerViewAdapter
-import com.example.remoteaccountingapplication.ui.viewmodel.ProductFragmentViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.ProductFragmentViewModelFactory
+import com.example.remoteaccountingapplication.ui.recyclerview.SaleTypesRecyclerViewAdapter
+import com.example.remoteaccountingapplication.ui.viewmodel.SaleTypesFragmentViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.SaleTypesFragmentViewModelFactory
 
-class ProductsFragment : Fragment(), OnMenuClickListener {
+class SaleTypesFragment : BaseFragment<FragmentSaleTypesBinding>(), OnMenuClickListener {
 
-    private var _binding: FragmentProductsBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: ProductFragmentViewModel by viewModels {
-        ProductFragmentViewModelFactory(
+    private val viewModel: SaleTypesFragmentViewModel by viewModels {
+        SaleTypesFragmentViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
     }
 
-    private lateinit var adapter: ProductsRecyclerViewAdapter
+    private lateinit var adapter: SaleTypesRecyclerViewAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProductsBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentSaleTypesBinding {
+        return FragmentSaleTypesBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getProducts().observe(this.viewLifecycleOwner) { products ->
-            adapter = ProductsRecyclerViewAdapter(products, this)
-            binding.recyclerViewProduct.adapter = adapter
+        viewModel.getSaleTypes().observe(this.viewLifecycleOwner) { saleTypesList ->
+            adapter = SaleTypesRecyclerViewAdapter(saleTypesList, this)
+            binding.recyclerViewTypes.adapter = adapter
         }
     }
 
@@ -61,7 +57,7 @@ class ProductsFragment : Fragment(), OnMenuClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 return when (item?.itemId) {
                     R.id.delete_btn -> {
-                        DeleteAlertDialog.newInstance(2, itemId)
+                        DeleteAlertDialog.newInstance(4, itemId)
                             .show(parentFragmentManager, "DELETE")
                         true
                     }
@@ -70,11 +66,11 @@ class ProductsFragment : Fragment(), OnMenuClickListener {
                         view
                             ?.findNavController()
                             ?.navigate(
-                                ProductsFragmentDirections
-                                    .actionProductsFragmentToEditHandbookFragment(
-                                        2,
+                                SaleTypesFragmentDirections
+                                    .actionSaleTypesFragmentToEditHandbookFragment(
+                                        4,
                                         itemId,
-                                        getString(R.string.label_fragment_edit_handbook)
+                                        getString(R.string.sale_types_edit_dynamic_title)
                                     )
                             )
                         true
@@ -88,10 +84,4 @@ class ProductsFragment : Fragment(), OnMenuClickListener {
         })
         popupMenu.show()
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

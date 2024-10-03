@@ -1,7 +1,6 @@
-package com.example.remoteaccountingapplication.ui.ui
+package com.example.remoteaccountingapplication.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +13,7 @@ import com.example.remoteaccountingapplication.databinding.FragmentReceiptNameBi
 import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptNameFragmentViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptNameFragmentViewModelFactory
 
-class ReceiptNameFragment : Fragment() {
-
-    private var _binding: FragmentReceiptNameBinding? = null
-    private val binding get() = _binding!!
+class ReceiptNameFragment : BaseFragment<FragmentReceiptNameBinding>() {
 
     private val viewModel: ReceiptNameFragmentViewModel by viewModels {
         ReceiptNameFragmentViewModelFactory(
@@ -25,12 +21,11 @@ class ReceiptNameFragment : Fragment() {
         )
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentReceiptNameBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentReceiptNameBinding {
+        return FragmentReceiptNameBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,10 +52,5 @@ class ReceiptNameFragment : Fragment() {
                 ReceiptNameFragmentDirections.actionReceiptNameFragmentToReceiptFragment(name)
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
