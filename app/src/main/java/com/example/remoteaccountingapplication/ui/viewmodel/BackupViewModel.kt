@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.example.remoteaccountingapplication.data.repository.RoomRepository
 
-// backup in Activity (when starts) and in Fragment (manual)
 open class BackupViewModel(private val repository: RoomRepository): ViewModel()  {
 
     fun dailyAllSalesBackUp(): LiveData<List<String>> {
@@ -29,8 +28,8 @@ open class BackupViewModel(private val repository: RoomRepository): ViewModel() 
         return repository.dailyNamesBackUp().asLiveData()
     }
 
-    fun dailyReceiptBackUpFlow(): LiveData<List<String>> {
-        return repository.dailyReceiptBackUpFlow().asLiveData()
+    fun dailyReceiptBackUp(): LiveData<List<String>> {
+        return repository.dailyReceiptBackUp().asLiveData()
     }
 }
 

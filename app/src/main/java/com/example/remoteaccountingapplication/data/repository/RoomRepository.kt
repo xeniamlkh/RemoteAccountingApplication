@@ -255,7 +255,7 @@ class RoomRepository(
         return namesDao.dailyNamesBackUp()
     }
 
-    fun dailyReceiptBackUpFlow(): Flow<List<String>> {
+    fun dailyReceiptBackUp(): Flow<List<String>> {
         return receiptDao.dailyReceiptBackUpFlow()
     }
 }
