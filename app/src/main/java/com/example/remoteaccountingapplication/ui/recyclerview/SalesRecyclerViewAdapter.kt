@@ -16,32 +16,20 @@ class SalesRecyclerViewAdapter(
     RecyclerView.Adapter<SalesRecyclerViewAdapter.SalesViewHolder>() {
 
     inner class SalesViewHolder(binding: SaleItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val product: TextView
-        val price: TextView
-        val number: TextView
-        val total: TextView
-        val paymentType: TextView
-        val saleType: TextView
-        val name: TextView
-        val comment: TextView
-        val menuBtn: FrameLayout
+        val product: TextView = binding.product
+        val price: TextView = binding.price
+        val number: TextView = binding.number
+        val total: TextView = binding.total
+        val paymentType: TextView = binding.paymentType
+        val saleType: TextView = binding.saleType
+        val name: TextView = binding.name
+        val comment: TextView = binding.comment
+        private val menuBtn: FrameLayout = binding.menuOptionsBtn
         var itemId: Int = -1
 
         init {
-            product = binding.product
-            price = binding.price
-            number = binding.number
-            total = binding.total
-            paymentType = binding.paymentType
-            saleType = binding.saleType
-            name = binding.name
-            comment = binding.comment
-            menuBtn = binding.menuOptionsBtn
-
             menuBtn.setOnClickListener {
-                if (adapterPosition >= 0) {
-                    menuClickListener.onMenuClick(it, itemId)
-                }
+                menuClickListener.onMenuClick(it, itemId)
             }
         }
     }

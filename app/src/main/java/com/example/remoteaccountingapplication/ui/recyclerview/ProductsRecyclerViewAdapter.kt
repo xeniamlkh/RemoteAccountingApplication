@@ -17,22 +17,15 @@ class ProductsRecyclerViewAdapter(
 
     inner class ProductsViewHolder(binding: HandbookItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val title: TextView
-        val price: TextView
-        val remains: TextView
-        val menuBtn: FrameLayout
+        val title: TextView = binding.title
+        val price: TextView = binding.price
+        val remains: TextView = binding.remains
+        private val menuBtn: FrameLayout = binding.menuOptionsBtn
         var itemId: Int = -1
 
         init {
-            title = binding.title
-            price = binding.price
-            remains = binding.remains
-            menuBtn = binding.menuOptionsBtn
-
             menuBtn.setOnClickListener {
-                if (adapterPosition >= 0) {
-                    menuClickListener.onMenuClick(it, itemId)
-                }
+                menuClickListener.onMenuClick(it, itemId)
             }
         }
     }

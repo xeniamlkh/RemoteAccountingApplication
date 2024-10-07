@@ -15,17 +15,10 @@ class ReceiptRecyclerViewAdapter(
     inner class ReceiptViewHolder(binding: ReceiptItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        val title: TextView
-        val price: TextView
-        val remains: TextView
-        val name: TextView
-
-        init {
-            title = binding.title
-            price = binding.price
-            remains = binding.remains
-            name = binding.name
-        }
+        val title: TextView = binding.title
+        val price: TextView = binding.price
+        val remains: TextView = binding.remains
+        val name: TextView = binding.name
 
     }
 

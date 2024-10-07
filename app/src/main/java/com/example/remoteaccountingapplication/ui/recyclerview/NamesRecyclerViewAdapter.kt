@@ -18,18 +18,13 @@ class NamesRecyclerViewAdapter(
     inner class NamesViewHolder(binding: HandbookItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        val title: TextView
-        val menuBtn: FrameLayout
+        val title: TextView = binding.title
+        private val menuBtn: FrameLayout = binding.menuOptionsBtn
         var itemId: Int = -1
 
         init {
-            title = binding.title
-            menuBtn = binding.menuOptionsBtn
-
             menuBtn.setOnClickListener {
-                if (adapterPosition >= 0) {
-                    menuClickListener.onMenuClick(it, itemId)
-                }
+                menuClickListener.onMenuClick(it, itemId)
             }
         }
     }
