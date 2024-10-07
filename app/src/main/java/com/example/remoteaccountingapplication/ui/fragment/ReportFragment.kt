@@ -101,8 +101,13 @@ class ReportFragment : BaseFragment<FragmentReportBinding>(), DateListener, OnMe
     private fun getListOfSales(startOfToday: Long, endOfToday: Long) {
         viewModel.getListOfSalesByDate(startOfToday, endOfToday)
             .observe(this.viewLifecycleOwner) { salesList ->
-                adapter = SalesRecyclerViewAdapter(salesList, this)
-                binding.recyclerViewReport.adapter = adapter
+                if (binding.recyclerViewReport.adapter == null) {
+                    adapter = SalesRecyclerViewAdapter(salesList, this)
+                    binding.recyclerViewReport.adapter = adapter
+                } else {
+                    (binding.recyclerViewReport.adapter as SalesRecyclerViewAdapter)
+                        .updateSalesList(salesList)
+                }
             }
 
         viewModel.getTotalSum(startOfToday, endOfToday).observe(this.viewLifecycleOwner) { total ->

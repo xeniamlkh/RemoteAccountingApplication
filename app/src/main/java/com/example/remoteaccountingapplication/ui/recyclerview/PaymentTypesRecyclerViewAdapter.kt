@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.HandbookItemBinding
 import com.example.remoteaccountingapplication.data.room.PaymentType
 
 class PaymentTypesRecyclerViewAdapter(
-    private val paymentTypes: List<PaymentType>,
+    private var paymentTypesList: List<PaymentType>,
     private val menuClickListener: OnMenuClickListener
 ) :
     RecyclerView.Adapter<PaymentTypesRecyclerViewAdapter.PaymentTypeViewHolder>() {
@@ -34,6 +35,17 @@ class PaymentTypesRecyclerViewAdapter(
 
     }
 
+    fun updatePaymentTypesList(newPaymentTypesList: List<PaymentType>) {
+        val diffCallback = AccountingDiffCallback(
+            oldList = paymentTypesList,
+            newList = newPaymentTypesList,
+            areItemsTheSame = { old: PaymentType, new: PaymentType -> old.id == new.id },
+            areContentsTheSame = { old: PaymentType, new: PaymentType -> old == new })
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        paymentTypesList = newPaymentTypesList
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentTypeViewHolder {
         val binding = HandbookItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,11 +53,11 @@ class PaymentTypesRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return paymentTypes.size
+        return paymentTypesList.size
     }
 
     override fun onBindViewHolder(holder: PaymentTypeViewHolder, position: Int) {
-        val paymentTypeItem = paymentTypes[position]
+        val paymentTypeItem = paymentTypesList[position]
         holder.title.text = paymentTypeItem.paymentType
         holder.itemId = paymentTypeItem.id
     }

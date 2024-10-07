@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.SaleItemBinding
 import com.example.remoteaccountingapplication.data.room.Sales
+
 class SalesRecyclerViewAdapter(
-    private val sales: List<Sales>,
+    private var salesList: List<Sales>,
     private val menuClickListener: OnMenuClickListener
 ) :
     RecyclerView.Adapter<SalesRecyclerViewAdapter.SalesViewHolder>() {
@@ -44,6 +46,17 @@ class SalesRecyclerViewAdapter(
         }
     }
 
+    fun updateSalesList(newSalesList: List<Sales>) {
+        val diffCallback = AccountingDiffCallback(
+            oldList = salesList,
+            newList = newSalesList,
+            areItemsTheSame = { old: Sales, new: Sales -> old.id == new.id },
+            areContentsTheSame = { old: Sales, new: Sales -> old == new })
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        salesList = newSalesList
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
         val binding = SaleItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -51,11 +64,11 @@ class SalesRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return sales.size
+        return salesList.size
     }
 
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
-        val salesItem = sales[position]
+        val salesItem = salesList[position]
 
         holder.product.text = buildString {
             append("Товар: ")

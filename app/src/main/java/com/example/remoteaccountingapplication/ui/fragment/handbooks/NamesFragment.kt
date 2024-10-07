@@ -40,8 +40,14 @@ class NamesFragment : BaseFragment<FragmentNamesBinding>(), OnMenuClickListener 
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getNames().observe(this.viewLifecycleOwner) { namesList ->
-            adapter = NamesRecyclerViewAdapter(namesList, this)
-            binding.recyclerViewNames.adapter = adapter
+            if (binding.recyclerViewNames.adapter == null) {
+                adapter = NamesRecyclerViewAdapter(namesList, this)
+                binding.recyclerViewNames.adapter = adapter
+            } else {
+                (binding.recyclerViewNames.adapter as NamesRecyclerViewAdapter)
+                    .updateNamesList(namesList)
+            }
+
         }
     }
 

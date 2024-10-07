@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.HandbookItemBinding
 import com.example.remoteaccountingapplication.data.room.Names
 
 class NamesRecyclerViewAdapter(
-    private val names: List<Names>,
+    private var namesList: List<Names>,
     private val menuClickListener: OnMenuClickListener
 ) :
     RecyclerView.Adapter<NamesRecyclerViewAdapter.NamesViewHolder>() {
@@ -33,6 +34,17 @@ class NamesRecyclerViewAdapter(
         }
     }
 
+    fun updateNamesList(newNamesList: List<Names>) {
+        val diffCallback = AccountingDiffCallback(
+            oldList = namesList,
+            newList = newNamesList,
+            areItemsTheSame = { old: Names, new: Names -> old.id == new.id },
+            areContentsTheSame = { old: Names, new: Names -> old == new })
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        namesList = newNamesList
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NamesViewHolder {
         val binding = HandbookItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -40,11 +52,11 @@ class NamesRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return names.size
+        return namesList.size
     }
 
     override fun onBindViewHolder(holder: NamesViewHolder, position: Int) {
-        val nameItem = names[position]
+        val nameItem = namesList[position]
         holder.title.text = nameItem.name
         holder.itemId = nameItem.id
     }

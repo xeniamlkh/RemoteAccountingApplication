@@ -40,8 +40,13 @@ class PaymentTypesFragment : BaseFragment<FragmentPaymentTypesBinding>(), OnMenu
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getPaymentTypes().observe(this.viewLifecycleOwner) { typesList ->
-            adapter = PaymentTypesRecyclerViewAdapter(typesList, this)
-            binding.recyclerViewTypes.adapter = adapter
+            if (binding.recyclerViewTypes.adapter == null) {
+                adapter = PaymentTypesRecyclerViewAdapter(typesList, this)
+                binding.recyclerViewTypes.adapter = adapter
+            } else {
+                (binding.recyclerViewTypes.adapter as PaymentTypesRecyclerViewAdapter)
+                    .updatePaymentTypesList(typesList)
+            }
         }
     }
 

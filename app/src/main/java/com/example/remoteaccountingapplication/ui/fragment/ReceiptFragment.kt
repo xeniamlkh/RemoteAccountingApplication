@@ -255,8 +255,13 @@ class ReceiptFragment : BaseFragment<FragmentReceiptBinding>() {
 
         viewModel.getListOfReceiptByDate(startOfToday, endOfToday)
             .observe(this.viewLifecycleOwner) { receiptList ->
-                adapter = ReceiptRecyclerViewAdapter(receiptList)
-                binding.recyclerViewReport.adapter = adapter
+                if (binding.recyclerViewReport.adapter == null) {
+                    adapter = ReceiptRecyclerViewAdapter(receiptList)
+                    binding.recyclerViewReport.adapter = adapter
+                } else {
+                    (binding.recyclerViewReport.adapter as ReceiptRecyclerViewAdapter)
+                        .updateReceiptList(receiptList)
+                }
             }
     }
 

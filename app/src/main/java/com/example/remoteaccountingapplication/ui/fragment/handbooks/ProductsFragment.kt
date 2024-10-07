@@ -40,8 +40,13 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(), OnMenuClickLis
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getProducts().observe(this.viewLifecycleOwner) { products ->
-            adapter = ProductsRecyclerViewAdapter(products, this)
-            binding.recyclerViewProduct.adapter = adapter
+            if (binding.recyclerViewProduct.adapter == null) {
+                adapter = ProductsRecyclerViewAdapter(products, this)
+                binding.recyclerViewProduct.adapter = adapter
+            } else {
+                (binding.recyclerViewProduct.adapter as ProductsRecyclerViewAdapter)
+                    .updateProductsList(products)
+            }
         }
     }
 

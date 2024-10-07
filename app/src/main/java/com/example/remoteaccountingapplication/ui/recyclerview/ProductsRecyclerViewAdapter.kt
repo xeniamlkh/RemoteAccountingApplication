@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remoteaccountingapplication.databinding.HandbookItemBinding
 import com.example.remoteaccountingapplication.data.room.Products
 
 class ProductsRecyclerViewAdapter(
-    private val products: List<Products>,
+    private var productsList: List<Products>,
     private val menuClickListener: OnMenuClickListener
 ) :
     RecyclerView.Adapter<ProductsRecyclerViewAdapter.ProductsViewHolder>() {
@@ -36,6 +37,17 @@ class ProductsRecyclerViewAdapter(
         }
     }
 
+    fun updateProductsList(newProductsList: List<Products>) {
+        val diffCallback = AccountingDiffCallback(
+            oldList = productsList,
+            newList = newProductsList,
+            areItemsTheSame = { old: Products, new: Products -> old.id == new.id },
+            areContentsTheSame = { old: Products, new: Products -> old == new })
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        productsList = newProductsList
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
         val binding = HandbookItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -43,11 +55,11 @@ class ProductsRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return productsList.size
     }
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
-        val noteItem = products[position]
+        val noteItem = productsList[position]
         holder.title.text = noteItem.product
         holder.price.text = noteItem.price.toString()
         holder.remains.text = noteItem.remains.toString()

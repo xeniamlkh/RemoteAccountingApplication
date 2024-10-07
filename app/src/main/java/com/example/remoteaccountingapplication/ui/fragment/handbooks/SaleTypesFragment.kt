@@ -40,8 +40,13 @@ class SaleTypesFragment : BaseFragment<FragmentSaleTypesBinding>(), OnMenuClickL
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getSaleTypes().observe(this.viewLifecycleOwner) { saleTypesList ->
-            adapter = SaleTypesRecyclerViewAdapter(saleTypesList, this)
-            binding.recyclerViewTypes.adapter = adapter
+            if (binding.recyclerViewTypes.adapter == null) {
+                adapter = SaleTypesRecyclerViewAdapter(saleTypesList, this)
+                binding.recyclerViewTypes.adapter = adapter
+            } else {
+                (binding.recyclerViewTypes.adapter as SaleTypesRecyclerViewAdapter)
+                    .updateSaleTypesList(saleTypesList)
+            }
         }
     }
 
