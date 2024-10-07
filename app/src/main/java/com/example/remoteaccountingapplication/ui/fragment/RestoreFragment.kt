@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentRestoreBinding
+import com.example.remoteaccountingapplication.domain.RestoreBackup
 import com.example.remoteaccountingapplication.ui.viewmodel.RestoreFragmentViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.RestoreFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -21,11 +22,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.lang.NumberFormatException
 
 class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
-//    private lateinit var restoreBackup: RestoreBackup
+    private lateinit var restoreBackup: RestoreBackup
 
     private var currentRequestCode: Int = 0
 
@@ -89,7 +89,7 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        restoreBackup = RestoreBackup(viewModel)
+        restoreBackup = RestoreBackup()
 
         viewModel.getSalesRowsNumber().observe(this.viewLifecycleOwner) { number ->
             binding.salesRows.text = number.toString()
@@ -116,77 +116,37 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
         }
 
         binding.restoreSalesBtn.setOnClickListener {
-            restoreSalesTable()
+            currentRequestCode = REQUEST_CODE_SALES
+            getContent()
         }
 
         binding.restoreProductsBtn.setOnClickListener {
-            restoreProductsTable()
+            currentRequestCode = REQUEST_CODE_PRODUCTS
+            getContent()
         }
 
         binding.restorePaymentTypesBtn.setOnClickListener {
-            restorePaymentTypesTable()
+            currentRequestCode = REQUEST_CODE_PAYMENT_TYPES
+            getContent()
         }
 
         binding.restoreSaleTypesBtn.setOnClickListener {
-            restoreSaleTypesTable()
+            currentRequestCode = REQUEST_CODE_SALE_TYPES
+            getContent()
         }
 
         binding.restoreNamesBtn.setOnClickListener {
-            restoreNamesTable()
+            currentRequestCode = REQUEST_CODE_NAMES
+            getContent()
         }
 
         binding.restoreReceiptBtn.setOnClickListener {
-            restoreReceiptTable()
+            currentRequestCode = REQUEST_CODE_RECEIPT
+            getContent()
         }
     }
 
-    private fun restoreSalesTable() {
-        currentRequestCode = REQUEST_CODE_SALES
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
-        }
-        resultLauncher.launch(intent)
-    }
-
-    private fun restoreProductsTable() {
-        currentRequestCode = REQUEST_CODE_PRODUCTS
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
-        }
-        resultLauncher.launch(intent)
-    }
-
-    private fun restorePaymentTypesTable() {
-        currentRequestCode = REQUEST_CODE_PAYMENT_TYPES
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
-        }
-        resultLauncher.launch(intent)
-    }
-
-    private fun restoreSaleTypesTable() {
-        currentRequestCode = REQUEST_CODE_SALE_TYPES
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
-        }
-        resultLauncher.launch(intent)
-    }
-
-    private fun restoreNamesTable() {
-        currentRequestCode = REQUEST_CODE_NAMES
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
-        }
-        resultLauncher.launch(intent)
-    }
-
-    private fun restoreReceiptTable() {
-        currentRequestCode = REQUEST_CODE_RECEIPT
+    private fun getContent() {
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"
@@ -209,48 +169,15 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                         .show()
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
+                    val bufferedReader =
+                        BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
-                    //restoreBackup.importSalesCsv(bufferedReader), move a process of reading lines?
+                    val salesList = restoreBackup.importSalesCsv(bufferedReader)
 
-                    bufferedReader.useLines { lines ->
-                        lines.forEach { line ->
-                            val tokens = line.split(",")
-                            if (tokens.size == 10) {
-                                val dateCalculationString = tokens[0].trim()
-                                val dateString = tokens[1].trim()
-                                val productString = tokens[2].trim()
-                                val priceString = tokens[3].trim()
-                                val numberString = tokens[4].trim()
-                                val paymentTypeString = tokens[5].trim()
-                                val saleTypeString = tokens[6].trim()
-                                val nameString = tokens[7].trim()
-                                val commentString = tokens[8].trim()
-                                val totalString = tokens[9].trim()
+                    bufferedReader.close()
 
-                                try {
-                                    val dateCalculationLong = dateCalculationString.toLong()
-                                    val priceDouble = priceString.toDouble()
-                                    val numberInt = numberString.toInt()
-                                    val totalDouble = totalString.toDouble()
-
-                                    viewModel.createSale(
-                                        dateCalculationLong,
-                                        dateString,
-                                        productString,
-                                        priceDouble,
-                                        numberInt,
-                                        paymentTypeString,
-                                        saleTypeString,
-                                        nameString,
-                                        commentString,
-                                        totalDouble
-                                    )
-                                } catch (e: NumberFormatException) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
+                    for (sale in salesList) {
+                        viewModel.saveSale(sale)
                     }
 
                     Snackbar
@@ -293,32 +220,15 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
                     val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
-                    bufferedReader.useLines { lines ->
-                        lines.forEach { line ->
-                            val tokens = line.split(",")
-                            if (tokens.size == 4) {
-                                val productString = tokens[0].trim()
-                                val priceString = tokens[1].trim()
-                                val remainsString = tokens[2].trim()
-                                val physicalString = tokens[3].trim()
+                    val productsList = restoreBackup.importProductsCsv(bufferedReader)
 
-                                try {
-                                    val priceDouble = priceString.toDouble()
-                                    val remainsInt = remainsString.toInt()
-                                    val physicalBoolean = physicalString.toBoolean()
+                    bufferedReader.close()
 
-                                    viewModel.createProductNoteWithRemains(
-                                        productString,
-                                        priceDouble,
-                                        remainsInt,
-                                        physicalBoolean
-                                    )
-                                } catch (e: NumberFormatException) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
+                    for (productItem in productsList) {
+                        viewModel.saveProductNote(productItem)
                     }
+
+
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
@@ -340,13 +250,10 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
     }
 
     private fun importPaymentTypesCsv(uri: Uri) {
-
         CoroutineScope(Dispatchers.IO).launch {
-
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
 
             if (fileName != null) {
-
                 if (!fileName.contains("PaymentTypes")) {
                     Snackbar
                         .make(
@@ -359,19 +266,14 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
                     val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
-                    bufferedReader.useLines { lines ->
-                        lines.forEach { line ->
-                            val tokens = line.split(",")
-                            if (tokens.size == 1) {
-                                val paymentTypeString = tokens[0].trim()
-                                try {
-                                    viewModel.createPaymentTypeRecord(paymentTypeString)
-                                } catch (e: NumberFormatException) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
+                    val paymentTypesList = restoreBackup.importPaymentTypesCsv(bufferedReader)
+
+                    bufferedReader.close()
+
+                    for (paymentType in paymentTypesList) {
+                        viewModel.savePaymentType(paymentType)
                     }
+
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
@@ -394,11 +296,8 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
     private fun importSaleTypesCsv(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
-
             if (fileName != null) {
-
                 if (!fileName.contains("SaleTypes")) {
                     Snackbar
                         .make(
@@ -409,21 +308,16 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                         .show()
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
+                    val bufferedReader =
+                        BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
-                    bufferedReader.useLines { lines ->
-                        lines.forEach { line ->
-                            val tokens = line.split(",")
-                            if (tokens.size == 1) {
-                                val saleTypeString = tokens[0].trim()
-                                try {
-                                    viewModel.createSaleTypeRecord(saleTypeString)
-                                } catch (e: NumberFormatException) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
+                    val saleTypesList = restoreBackup.importSaleTypesCsv(bufferedReader)
+
+                    bufferedReader.close()
+                    for (saleType in saleTypesList) {
+                        viewModel.saveSaleType(saleType)
                     }
+
                     Snackbar
                         .make(
                             requireActivity().findViewById(android.R.id.content),
@@ -445,11 +339,8 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
     private fun importNamesCsv(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
-
             if (fileName != null) {
-
                 if (!fileName.contains("Names")) {
                     Snackbar
                         .make(
@@ -462,19 +353,12 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
                     val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
-                    bufferedReader.useLines { lines ->
-                        lines.forEach { line ->
-                            val tokens = line.split(",")
-                            if (tokens.size == 1) {
-                                val nameString = tokens[0].trim()
+                    val namesList = restoreBackup.importNamesCsv(bufferedReader)
 
-                                try {
-                                    viewModel.createNameRecord(nameString)
-                                } catch (e: NumberFormatException) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
+                    bufferedReader.close()
+
+                    for (name in namesList) {
+                        viewModel.saveName(name)
                     }
 
                     Snackbar
@@ -498,11 +382,8 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
     private fun importReceiptOfGoodsCsv(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
-
             if (fileName != null) {
-
                 if (!fileName.contains("ReceiptOfGoods")) {
                     Snackbar
                         .make(
@@ -515,35 +396,12 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
                     val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
-                    bufferedReader.useLines { lines ->
-                        lines.forEach { line ->
-                            val tokens = line.split(",")
-                            if (tokens.size == 6) {
-                                val dateCalculationString = tokens[0].trim()
-                                val dateString = tokens[1].trim()
-                                val nameString = tokens[2].trim()
-                                val productString = tokens[3].trim()
-                                val priceString = tokens[4].trim()
-                                val numberString = tokens[5].trim()
+                    val receiptList = restoreBackup.importReceiptOfGoodsCsv(bufferedReader)
 
-                                try {
-                                    val dateCalculationLong = dateCalculationString.toLong()
-                                    val priceDouble = priceString.toDouble()
-                                    val numberInt = numberString.toInt()
+                    bufferedReader.close()
 
-                                    viewModel.createReceiptItem(
-                                        dateCalculationLong,
-                                        dateString,
-                                        nameString,
-                                        productString,
-                                        priceDouble,
-                                        numberInt
-                                    )
-                                } catch (e: NumberFormatException) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
+                    for (receipt in receiptList) {
+                        viewModel.insertReceiptProduct(receipt)
                     }
 
                     Snackbar
