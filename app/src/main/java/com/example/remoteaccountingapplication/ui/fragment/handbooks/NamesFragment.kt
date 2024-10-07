@@ -16,13 +16,13 @@ import com.example.remoteaccountingapplication.ui.alertdialogs.DeleteAlertDialog
 import com.example.remoteaccountingapplication.ui.fragment.BaseFragment
 import com.example.remoteaccountingapplication.ui.recyclerview.NamesRecyclerViewAdapter
 import com.example.remoteaccountingapplication.ui.recyclerview.OnMenuClickListener
-import com.example.remoteaccountingapplication.ui.viewmodel.NamesFragmentViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.NamesFragmentViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.BaseViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.BaseViewModelFactory
 
 class NamesFragment : BaseFragment<FragmentNamesBinding>(), OnMenuClickListener {
 
-    private val viewModel: NamesFragmentViewModel by viewModels {
-        NamesFragmentViewModelFactory(
+    private val viewModel: BaseViewModel by viewModels {
+        BaseViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
     }

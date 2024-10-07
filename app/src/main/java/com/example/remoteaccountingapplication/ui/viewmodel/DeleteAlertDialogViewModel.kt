@@ -7,7 +7,7 @@ import com.example.remoteaccountingapplication.data.repository.RoomRepository
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
-class DeleteAlertDialogViewModel(private val repository: RoomRepository) : ViewModel() {
+class DeleteAlertDialogViewModel(private val repository: RoomRepository) : BaseViewModel(repository) {
 
     fun deleteSaleItemById(itemId: Int) {
         viewModelScope.launch {
@@ -57,12 +57,6 @@ class DeleteAlertDialogViewModel(private val repository: RoomRepository) : ViewM
                     }
                 }
             }
-        }
-    }
-
-    private fun updateProductNumberByProduct(product: String, remains: Int) {
-        viewModelScope.launch {
-            repository.updateProductNumberByProduct(product, remains)
         }
     }
 }

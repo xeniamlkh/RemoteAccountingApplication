@@ -10,13 +10,14 @@ import androidx.navigation.findNavController
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentReceiptNameBinding
-import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptNameFragmentViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptNameFragmentViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.BaseViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.BaseViewModelFactory
+
 
 class ReceiptNameFragment : BaseFragment<FragmentReceiptNameBinding>() {
 
-    private val viewModel: ReceiptNameFragmentViewModel by viewModels {
-        ReceiptNameFragmentViewModelFactory(
+    private val viewModel: BaseViewModel by viewModels {
+        BaseViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
     }

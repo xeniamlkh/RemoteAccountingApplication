@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.remoteaccountingapplication.data.repository.RoomRepository
 import com.example.remoteaccountingapplication.data.room.Names
 import com.example.remoteaccountingapplication.data.room.PaymentType
@@ -12,9 +11,8 @@ import com.example.remoteaccountingapplication.data.room.Products
 import com.example.remoteaccountingapplication.data.room.Receipt
 import com.example.remoteaccountingapplication.data.room.SaleType
 import com.example.remoteaccountingapplication.data.room.Sales
-import kotlinx.coroutines.launch
 
-class RestoreFragmentViewModel(private val repository: RoomRepository) : ViewModel() {
+class RestoreFragmentViewModel(private val repository: RoomRepository) : BaseViewModel(repository) {
 
     fun getSalesRowsNumber(): LiveData<Int> {
         return repository.getSalesRowsNumber().asLiveData()
@@ -113,30 +111,6 @@ class RestoreFragmentViewModel(private val repository: RoomRepository) : ViewMod
             number
         )
         insertReceiptProduct(receipt)
-    }
-
-    private fun saveSale(sale: Sales) {
-        viewModelScope.launch { repository.insertSale(sale) }
-    }
-
-    private fun saveProductNote(note: Products) {
-        viewModelScope.launch { repository.insertNote(note) }
-    }
-
-    private fun savePaymentType(type: PaymentType) {
-        viewModelScope.launch { repository.insertPaymentType(type) }
-    }
-
-    private fun saveName(name: Names) {
-        viewModelScope.launch { repository.insertName(name) }
-    }
-
-    private fun saveSaleType(type: SaleType) {
-        viewModelScope.launch { repository.insertSaleType(type) }
-    }
-
-    private fun insertReceiptProduct(receiptProduct: Receipt) {
-        viewModelScope.launch { repository.insertReceiptProduct(receiptProduct) }
     }
 }
 

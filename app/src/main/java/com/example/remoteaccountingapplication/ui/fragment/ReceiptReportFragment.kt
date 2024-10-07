@@ -8,16 +8,16 @@ import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentReceiptReportBinding
 import com.example.remoteaccountingapplication.ui.recyclerview.ReceiptRecyclerViewAdapter
-import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptReportFragmentViewModel
-import com.example.remoteaccountingapplication.ui.viewmodel.ReceiptReportFragmentViewModelFactory
+import com.example.remoteaccountingapplication.ui.viewmodel.BaseViewModel
+import com.example.remoteaccountingapplication.ui.viewmodel.BaseViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class ReceiptReportFragment : BaseFragment<FragmentReceiptReportBinding>(), DateListener {
 
-    private val viewModel: ReceiptReportFragmentViewModel by viewModels {
-        ReceiptReportFragmentViewModelFactory(
+    private val viewModel: BaseViewModel by viewModels {
+        BaseViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
     }
