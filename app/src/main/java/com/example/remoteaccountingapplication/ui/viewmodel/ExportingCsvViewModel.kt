@@ -18,8 +18,9 @@ class ExportingCsvViewModel(private val repository: RoomRepository) : ViewModel(
     private val _endDateLivaData = MutableLiveData<String>()
     val endDateLiveData: LiveData<String> get() = _endDateLivaData
 
-    private var startDateVM: Long? = null
-    private var endDateVM: Long? = null
+    private val currentDateMilliseconds = Calendar.getInstance().timeInMillis
+    private var startDateVM: Long = currentDateMilliseconds
+    private var endDateVM: Long = currentDateMilliseconds
 
     fun setStartDate(startDate: Long?) {
         if (startDate != null) {
@@ -44,7 +45,7 @@ class ExportingCsvViewModel(private val repository: RoomRepository) : ViewModel(
     }
 
     fun exportRangeSalesCsv(): LiveData<List<String>> {
-        return repository.exportRangeSalesCsv(startDateVM!!, endDateVM!!).asLiveData() // null
+        return repository.exportRangeSalesCsv(startDateVM, endDateVM).asLiveData()
     }
 
     fun exportMonthSales(): LiveData<List<String>> {
@@ -56,8 +57,8 @@ class ExportingCsvViewModel(private val repository: RoomRepository) : ViewModel(
     }
 
     fun clearRange() {
-        startDateVM = null
-        endDateVM = null
+        startDateVM = 0L
+        endDateVM = 0L
 
         _startDateLivaData.value = ""
         _endDateLivaData.value = ""
