@@ -102,8 +102,10 @@ class MainActivity : BaseActivity(), PermissionRationaleDialogListener {
     }
 
     private fun showExplanation() {
-        PermissionRationaleDialog(this).show(supportFragmentManager,
-            getString(R.string.rationale_tag))
+        PermissionRationaleDialog(this).show(
+            supportFragmentManager,
+            getString(R.string.rationale_tag)
+        )
     }
 
     override fun callPermissionLauncher() {

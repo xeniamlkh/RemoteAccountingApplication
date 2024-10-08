@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentBackupBinding
-import com.example.remoteaccountingapplication.domain.Backup
+import com.example.remoteaccountingapplication.ui.utils.Backup
 import com.example.remoteaccountingapplication.ui.getTodayDateY
 import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.BackupViewModelFactory
@@ -36,7 +36,7 @@ class BackupFragment : BaseFragment<FragmentBackupBinding>() {
 
         binding.backupBtn.setOnClickListener {
             val todayDateY = requireContext().getTodayDateY()
-            val todayBackupDir = backup.createTodayBackupDir(todayDateY)
+            val todayBackupDir = backup.createTodayBackupFolder(todayDateY)
 
             val csvSalesTitle = getString(R.string.sales_csv_backup_title, todayDateY)
             val csvSalesFile = backup.createTodayBackupFile(todayBackupDir, csvSalesTitle)

@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentDateRangeBinding
-import com.example.remoteaccountingapplication.domain.Csv
+import com.example.remoteaccountingapplication.ui.utils.Csv
 import com.example.remoteaccountingapplication.ui.shareCSVFile
 import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.ExportingCsvViewModelFactory

@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import com.example.remoteaccountingapplication.R
 import com.example.remoteaccountingapplication.RemoteAccountingApplication
 import com.example.remoteaccountingapplication.databinding.FragmentRestoreBinding
-import com.example.remoteaccountingapplication.domain.RestoreBackup
+import com.example.remoteaccountingapplication.ui.utils.RestoreBackup
 import com.example.remoteaccountingapplication.ui.viewmodel.RestoreFragmentViewModel
 import com.example.remoteaccountingapplication.ui.viewmodel.RestoreFragmentViewModelFactory
 import com.google.android.material.snackbar.Snackbar

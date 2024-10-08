@@ -1,4 +1,4 @@
-package com.example.remoteaccountingapplication.domain
+package com.example.remoteaccountingapplication.ui.utils
 
 import com.example.remoteaccountingapplication.data.room.Names
 import com.example.remoteaccountingapplication.data.room.PaymentType
