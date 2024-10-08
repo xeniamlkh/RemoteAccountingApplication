@@ -20,25 +20,23 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.BufferedReader
-import java.io.InputStreamReader
 
 class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
     private lateinit var restoreBackup: RestoreBackup
-
     private var currentRequestCode: Int = 0
-
-    private var salesImported: Boolean = false
-    private var productsImported: Boolean = false
-    private var paymentTypesImported: Boolean = false
-    private var saleTypesImported: Boolean = false
-    private var namesImported: Boolean = false
 
     private val viewModel: RestoreFragmentViewModel by viewModels {
         RestoreFragmentViewModelFactory(
             (activity?.application as RemoteAccountingApplication).repository
         )
+    }
+
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentRestoreBinding {
+        return FragmentRestoreBinding.inflate(inflater, container, false)
     }
 
     private val resultLauncher =
@@ -49,7 +47,6 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
                 if (type.equals("text/comma-separated-values")) {
                     data?.data?.let { uri ->
-
                         when (currentRequestCode) {
                             REQUEST_CODE_SALES -> importSalesCsv(uri)
                             REQUEST_CODE_PRODUCTS -> importProductsCsv(uri)
@@ -57,34 +54,14 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
                             REQUEST_CODE_SALE_TYPES -> importSaleTypesCsv(uri)
                             REQUEST_CODE_NAMES -> importNamesCsv(uri)
                             REQUEST_CODE_RECEIPT -> importReceiptOfGoodsCsv(uri)
-                            else -> Snackbar
-                                .make(
-                                    requireActivity().findViewById(android.R.id.content),
-                                    getString(R.string.error_can_t_import_table),
-                                    Snackbar.LENGTH_SHORT
-                                )
-                                .show()
+                            else -> showSnackBar(getString(R.string.error_can_t_import_table))
                         }
-
                     }
                 } else {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_mime_type_choose_another_file),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_mime_type_choose_another_file))
                 }
             }
         }
-
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentRestoreBinding {
-        return FragmentRestoreBinding.inflate(inflater, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -160,42 +137,23 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
             if (fileName != null) {
                 if (!fileName.contains("Sales")) {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_a_sales_table),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_table_choose_a_sales_table))
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader =
-                        BufferedReader(InputStreamReader(inputStream, "UTF-16"))
-
-                    val salesList = restoreBackup.importSalesCsv(bufferedReader)
-
-                    bufferedReader.close()
+                    val salesList = restoreBackup.importSalesCsv(inputStream)
 
                     for (sale in salesList) {
                         viewModel.saveSale(sale)
                     }
 
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.sales_table_imported),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.sales_table_imported))
 
                     requireActivity().runOnUiThread {
                         binding.salesCheck.visibility = View.VISIBLE
                     }
-
                 }
             }
         }
-
         viewModel.getSalesRowsNumber().observe(this.viewLifecycleOwner) { number ->
             binding.salesRows.text = number.toString()
         }
@@ -203,39 +161,20 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
     private fun importProductsCsv(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
 
             if (fileName != null) {
-
                 if (!fileName.contains("Products")) {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_a_products_table),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_table_choose_a_products_table))
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
-
-                    val productsList = restoreBackup.importProductsCsv(bufferedReader)
-
-                    bufferedReader.close()
+                    val productsList = restoreBackup.importProductsCsv(inputStream)
 
                     for (productItem in productsList) {
                         viewModel.saveProductNote(productItem)
                     }
 
-
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.products_table_imported),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.products_table_imported))
 
                     requireActivity().runOnUiThread {
                         binding.productsCheck.visibility = View.VISIBLE
@@ -255,32 +194,16 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
             if (fileName != null) {
                 if (!fileName.contains("PaymentTypes")) {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_a_payment_types_table),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_table_choose_a_payment_types_table))
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
-
-                    val paymentTypesList = restoreBackup.importPaymentTypesCsv(bufferedReader)
-
-                    bufferedReader.close()
+                    val paymentTypesList = restoreBackup.importPaymentTypesCsv(inputStream)
 
                     for (paymentType in paymentTypesList) {
                         viewModel.savePaymentType(paymentType)
                     }
 
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.payment_types_table_imported),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.payment_types_table_imported))
 
                     requireActivity().runOnUiThread {
                         binding.paymentTypesCheck.visibility = View.VISIBLE
@@ -299,32 +222,16 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
             if (fileName != null) {
                 if (!fileName.contains("SaleTypes")) {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_a_sale_types_table),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_table_choose_a_sale_types_table))
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader =
-                        BufferedReader(InputStreamReader(inputStream, "UTF-16"))
+                    val saleTypesList = restoreBackup.importSaleTypesCsv(inputStream)
 
-                    val saleTypesList = restoreBackup.importSaleTypesCsv(bufferedReader)
-
-                    bufferedReader.close()
                     for (saleType in saleTypesList) {
                         viewModel.saveSaleType(saleType)
                     }
 
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.sale_types_table_imported),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.sale_types_table_imported))
 
                     requireActivity().runOnUiThread {
                         binding.saleTypesCheck.visibility = View.VISIBLE
@@ -342,32 +249,16 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
             if (fileName != null) {
                 if (!fileName.contains("Names")) {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_a_names_table),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_table_choose_a_names_table))
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
-
-                    val namesList = restoreBackup.importNamesCsv(bufferedReader)
-
-                    bufferedReader.close()
+                    val namesList = restoreBackup.importNamesCsv(inputStream)
 
                     for (name in namesList) {
                         viewModel.saveName(name)
                     }
 
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.names_table_imported),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.names_table_imported))
 
                     requireActivity().runOnUiThread {
                         binding.namesCheck.visibility = View.VISIBLE
@@ -385,32 +276,16 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
             val fileName = DocumentFile.fromSingleUri(requireContext(), uri)?.name
             if (fileName != null) {
                 if (!fileName.contains("ReceiptOfGoods")) {
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.error_wrong_table_choose_an_receipt_table),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.error_wrong_table_choose_an_receipt_table))
                 } else {
                     val inputStream = requireContext().contentResolver.openInputStream(uri)
-                    val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
-
-                    val receiptList = restoreBackup.importReceiptOfGoodsCsv(bufferedReader)
-
-                    bufferedReader.close()
+                    val receiptList = restoreBackup.importReceiptOfGoodsCsv(inputStream)
 
                     for (receipt in receiptList) {
                         viewModel.insertReceiptProduct(receipt)
                     }
 
-                    Snackbar
-                        .make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.receipt_table_imported),
-                            Snackbar.LENGTH_SHORT
-                        )
-                        .show()
+                    showSnackBar(getString(R.string.receipt_table_imported))
 
                     requireActivity().runOnUiThread {
                         binding.receiptCheck.visibility = View.VISIBLE
@@ -425,14 +300,14 @@ class RestoreFragment : BaseFragment<FragmentRestoreBinding>() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        salesImported = false
-        productsImported = false
-        paymentTypesImported = false
-        saleTypesImported = false
-        namesImported = false
+    private fun showSnackBar(message: String) {
+        Snackbar
+            .make(
+                requireActivity().findViewById(android.R.id.content),
+                message,
+                Snackbar.LENGTH_SHORT
+            )
+            .show()
     }
 
     companion object {

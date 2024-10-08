@@ -7,13 +7,16 @@ import com.example.remoteaccountingapplication.data.room.Receipt
 import com.example.remoteaccountingapplication.data.room.SaleType
 import com.example.remoteaccountingapplication.data.room.Sales
 import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
 
 class RestoreBackup {
 
-    fun importSalesCsv(bufferedReader: BufferedReader): ArrayList<Sales> {
+    fun importSalesCsv(inputStream: InputStream?): ArrayList<Sales> {
 
         lateinit var sale: Sales
         val salesList: ArrayList<Sales> = ArrayList()
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
         bufferedReader.forEachLine { line ->
             val tokens = line.split(",")
@@ -48,13 +51,16 @@ class RestoreBackup {
             }
         }
 
+        bufferedReader.close()
+
         return salesList
     }
 
-    fun importProductsCsv(bufferedReader: BufferedReader): ArrayList<Products> {
+    fun importProductsCsv(inputStream: InputStream?): ArrayList<Products> {
 
         lateinit var productItem: Products
         val productsList: ArrayList<Products> = ArrayList()
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
         bufferedReader.forEachLine { line ->
             val tokens = line.split(",")
@@ -70,13 +76,16 @@ class RestoreBackup {
             }
         }
 
+        bufferedReader.close()
+
         return productsList
     }
 
-    fun importPaymentTypesCsv(bufferedReader: BufferedReader): ArrayList<PaymentType> {
+    fun importPaymentTypesCsv(inputStream: InputStream?): ArrayList<PaymentType> {
 
         lateinit var paymentType: PaymentType
         val paymentTypeList: ArrayList<PaymentType> = ArrayList()
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
         bufferedReader.forEachLine { line ->
             val tokens = line.split(",")
@@ -87,13 +96,16 @@ class RestoreBackup {
             }
         }
 
+        bufferedReader.close()
+
         return paymentTypeList
     }
 
-    fun importSaleTypesCsv(bufferedReader: BufferedReader): ArrayList<SaleType> {
+    fun importSaleTypesCsv(inputStream: InputStream?): ArrayList<SaleType> {
 
         lateinit var saleType: SaleType
         val saleTypeList: ArrayList<SaleType> = ArrayList()
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
         bufferedReader.forEachLine { line ->
             val tokens = line.split(",")
@@ -104,13 +116,16 @@ class RestoreBackup {
             }
         }
 
+        bufferedReader.close()
+
         return saleTypeList
     }
 
-    fun importNamesCsv(bufferedReader: BufferedReader): ArrayList<Names> {
+    fun importNamesCsv(inputStream: InputStream?): ArrayList<Names> {
 
         lateinit var nameItem: Names
         val namesList: ArrayList<Names> = ArrayList()
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
         bufferedReader.forEachLine { line ->
             val tokens = line.split(",")
@@ -121,13 +136,16 @@ class RestoreBackup {
             }
         }
 
+        bufferedReader.close()
+
         return namesList
     }
 
-    fun importReceiptOfGoodsCsv(bufferedReader: BufferedReader): ArrayList<Receipt> {
+    fun importReceiptOfGoodsCsv(inputStream: InputStream?): ArrayList<Receipt> {
 
         lateinit var receipt: Receipt
         val receiptList: ArrayList<Receipt> = ArrayList()
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-16"))
 
         bufferedReader.forEachLine { line ->
             val tokens = line.split(",")
@@ -144,6 +162,8 @@ class RestoreBackup {
 
             }
         }
+
+        bufferedReader.close()
 
         return receiptList
     }

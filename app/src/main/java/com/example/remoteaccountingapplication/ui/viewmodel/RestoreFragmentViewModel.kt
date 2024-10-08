@@ -5,12 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.example.remoteaccountingapplication.data.repository.RoomRepository
-import com.example.remoteaccountingapplication.data.room.Names
-import com.example.remoteaccountingapplication.data.room.PaymentType
-import com.example.remoteaccountingapplication.data.room.Products
-import com.example.remoteaccountingapplication.data.room.Receipt
-import com.example.remoteaccountingapplication.data.room.SaleType
-import com.example.remoteaccountingapplication.data.room.Sales
 
 class RestoreFragmentViewModel(private val repository: RoomRepository) : BaseViewModel(repository) {
 
@@ -36,81 +30,6 @@ class RestoreFragmentViewModel(private val repository: RoomRepository) : BaseVie
 
     fun getReceiptRowsNumber(): LiveData<Int> {
         return repository.getReceiptRowsNumber().asLiveData()
-    }
-
-    fun createSale(
-        dateCalc: Long,
-        date: String,
-        product: String,
-        price: Double,
-        number: Int,
-        paymentType: String,
-        saleType: String,
-        name: String,
-        comment: String,
-        total: Double
-    ) {
-        val sale =
-            Sales(
-                0,
-                dateCalc,
-                date,
-                product,
-                price,
-                number,
-                paymentType,
-                saleType,
-                name,
-                comment,
-                total
-            )
-        saveSale(sale)
-    }
-
-    fun createPaymentTypeRecord(type: String) {
-        val typeRecord = PaymentType(0, type)
-        savePaymentType(typeRecord)
-    }
-
-    fun createSaleTypeRecord(type: String) {
-        val typeRecord = SaleType(0, type)
-        saveSaleType(typeRecord)
-    }
-
-    fun createProductNoteWithRemains(
-        product: String,
-        price: Double,
-        remains: Int,
-        physical: Boolean
-    ) {
-        val note = Products(0, product, price, remains, physical)
-        saveProductNote(note)
-    }
-
-    fun createNameRecord(name: String) {
-        val nameRecord = Names(0, name)
-        saveName(nameRecord)
-    }
-
-    fun createReceiptItem(
-        dateCalc: Long,
-        date: String,
-        name: String,
-        product: String,
-        price: Double,
-        number: Int
-    ) {
-
-        val receipt = Receipt(
-            0,
-            dateCalc,
-            date,
-            name,
-            product,
-            price,
-            number
-        )
-        insertReceiptProduct(receipt)
     }
 }
 
