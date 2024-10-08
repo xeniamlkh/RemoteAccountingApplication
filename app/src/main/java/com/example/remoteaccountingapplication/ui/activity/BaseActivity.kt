@@ -24,49 +24,60 @@ open class BaseActivity : AppCompatActivity() {
         ExportingCsvViewModelFactory((application as RemoteAccountingApplication).repository)
     }
 
-    private lateinit var backup: Backup
+    private val backup: Backup = Backup()
     private lateinit var csv: Csv
 
     fun createBackUp() {
-        backup = Backup()
-
         val todayDateY = this.getTodayDateY()
-        val todayBackupDir = backup.createTodayBackupDir(todayDateY)
+        val todayBackupDir = backup.createTodayBackupFolder(todayDateY)
 
         val csvSalesTitle = getString(R.string.sales_csv_backup_title, todayDateY)
         val csvSalesFile = backup.createTodayBackupFile(todayBackupDir, csvSalesTitle)
-        backupViewModel.dailyAllSalesBackUp().observe(this) { allSales ->
-            backup.writeBackup(allSales, csvSalesFile)
+        if (csvSalesFile.length() == 0L) {
+            backupViewModel.dailyAllSalesBackUp().observe(this) { allSales ->
+                backup.writeBackup(allSales, csvSalesFile)
+            }
         }
 
         val csvProductsTitle = getString(R.string.products_csv_backup_title, todayDateY)
         val csvProductsFile = backup.createTodayBackupFile(todayBackupDir, csvProductsTitle)
-        backupViewModel.dailyProductsBackUp().observe(this) { allProducts ->
-            backup.writeBackup(allProducts, csvProductsFile)
+        if (csvProductsFile.length() == 0L) {
+            backupViewModel.dailyProductsBackUp().observe(this) { allProducts ->
+                backup.writeBackup(allProducts, csvProductsFile)
+            }
         }
+
 
         val csvPaymentTypesTitle = getString(R.string.payment_types_csv_backup_title, todayDateY)
         val csvPaymentTypesFile = backup.createTodayBackupFile(todayBackupDir, csvPaymentTypesTitle)
-        backupViewModel.dailyPaymentTypeBackUp().observe(this) { allPaymentTypes ->
-            backup.writeBackup(allPaymentTypes, csvPaymentTypesFile)
+        if (csvPaymentTypesFile.length() == 0L) {
+            backupViewModel.dailyPaymentTypeBackUp().observe(this) { allPaymentTypes ->
+                backup.writeBackup(allPaymentTypes, csvPaymentTypesFile)
+            }
         }
 
         val csvSaleTypesTitle = getString(R.string.sale_types_csv_backup_title, todayDateY)
         val csvSaleTypesFile = backup.createTodayBackupFile(todayBackupDir, csvSaleTypesTitle)
-        backupViewModel.dailySaleTypeBackUp().observe(this) { allSaleTypes ->
-            backup.writeBackup(allSaleTypes, csvSaleTypesFile)
+        if (csvSaleTypesFile.length() == 0L) {
+            backupViewModel.dailySaleTypeBackUp().observe(this) { allSaleTypes ->
+                backup.writeBackup(allSaleTypes, csvSaleTypesFile)
+            }
         }
 
         val csvNamesTitle = getString(R.string.names_csv_backup_title, todayDateY)
         val csvNamesFile = backup.createTodayBackupFile(todayBackupDir, csvNamesTitle)
-        backupViewModel.dailyNamesBackUp().observe(this) { allNames ->
-            backup.writeBackup(allNames, csvNamesFile)
+        if (csvNamesFile.length() == 0L) {
+            backupViewModel.dailyNamesBackUp().observe(this) { allNames ->
+                backup.writeBackup(allNames, csvNamesFile)
+            }
         }
 
         val csvReceiptTitle = getString(R.string.receipt_csv_backup_title, todayDateY)
         val csvReceiptFile = backup.createTodayBackupFile(todayBackupDir, csvReceiptTitle)
-        backupViewModel.dailyReceiptBackUp().observe(this) { allReceipt ->
-            backup.writeBackup(allReceipt, csvReceiptFile)
+        if (csvReceiptFile.length() == 0L) {
+            backupViewModel.dailyReceiptBackUp().observe(this) { allReceipt ->
+                backup.writeBackup(allReceipt, csvReceiptFile)
+            }
         }
     }
 

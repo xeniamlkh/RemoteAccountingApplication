@@ -36,7 +36,7 @@ class BackupFragment : BaseFragment<FragmentBackupBinding>() {
 
         binding.backupBtn.setOnClickListener {
             val todayDateY = requireContext().getTodayDateY()
-            val todayBackupDir = backup.createTodayBackupDir(todayDateY)
+            val todayBackupDir = backup.createTodayBackupFolder(todayDateY)
 
             val csvSalesTitle = getString(R.string.sales_csv_backup_title, todayDateY)
             val csvSalesFile = backup.createTodayBackupFile(todayBackupDir, csvSalesTitle)

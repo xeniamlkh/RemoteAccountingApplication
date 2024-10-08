@@ -7,17 +7,19 @@ import java.io.OutputStreamWriter
 
 class Backup {
 
-    fun createTodayBackupDir(todayDateY: String): File {
-        val docFolder = File("${Environment.getExternalStorageDirectory()}/Documents")
-        val backupFolder =
-            File(
-                "${
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                }/RemoteAccountingBackup"
-            )
+    private val documentsFolder =
+        File("${Environment.getExternalStorageDirectory()}/Documents")
 
-        val absolutPath: String = getAbsolutBackupPath(docFolder, backupFolder)
-        countBackups(backupFolder)
+    private val remoteAccountingBackupFolder =
+        File(
+            "${
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            }/RemoteAccountingBackup"
+        )
+
+    fun createTodayBackupFolder(todayDateY: String): File {
+        val absolutPath: String = createAbsolutBackupPath()
+        controlBackupFolders(remoteAccountingBackupFolder)
 
         val filePath = String.format(
             "%1s/%2s",
@@ -34,33 +36,29 @@ class Backup {
         return fileDir
     }
 
-    private fun getAbsolutBackupPath(docFolder: File, backupFolder: File): String {
-        if (!docFolder.exists()) {
-            docFolder.mkdir()
-            backupFolder.mkdir()
+    private fun createAbsolutBackupPath(): String {
 
-            return String.format(
-                "%1s/%2s",
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-                "RemoteAccountingBackup"
-            )
+        if (!documentsFolder.exists()) {
+            documentsFolder.mkdir()
+            remoteAccountingBackupFolder.mkdir()
         } else {
-            if (!backupFolder.exists()) {
-                backupFolder.mkdir()
+            if (!remoteAccountingBackupFolder.exists()) {
+                remoteAccountingBackupFolder.mkdir()
             }
-
-            return String.format(
-                "%1s/%2s",
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-                "RemoteAccountingBackup"
-            )
         }
+
+        return String.format(
+            "%1s/%2s",
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            "RemoteAccountingBackup"
+        )
     }
 
-    private fun countBackups(backupFolder: File) {
-        if (backupFolder.exists() && backupFolder.isDirectory) {
+    private fun controlBackupFolders(remoteAccountingBackupFolder: File) {
+        if (remoteAccountingBackupFolder.exists() && remoteAccountingBackupFolder.isDirectory) {
             val subFolders =
-                backupFolder.listFiles { file -> file.isDirectory }?.toList() ?: emptyList()
+                remoteAccountingBackupFolder.listFiles { file -> file.isDirectory }?.toList()
+                    ?: emptyList()
 
             if (subFolders.size > 5) {
                 val sortedSubFolders = subFolders.sortedBy { it.lastModified() }
@@ -100,10 +98,8 @@ class Backup {
             writer.close()
             stream.close()
 
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-
 }

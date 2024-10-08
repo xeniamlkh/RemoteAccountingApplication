@@ -85,8 +85,8 @@
     <string name="send_csv">Переслать CSV</string>
     <string name="sales_csv_backup_title">%1$s Sales.csv</string>
     <string name="products_csv_backup_title">%1$s Products.csv</string>
-    <string name="payment_types_csv_backup_title">%1$s Payment Types.csv</string>
-    <string name="sale_types_csv_backup_title">%1$s Sale Types.csv</string>
+    <string name="payment_types_csv_backup_title">%1$s PaymentTypes.csv</string>
+    <string name="sale_types_csv_backup_title">%1$s SaleTypes.csv</string>
     <string name="names_csv_backup_title">%1$s Names.csv</string>
     <string name="receipt_csv_backup_title">%1$s ReceiptOfGoods.csv</string>
     <string name="delete_message">Вы уверены, что хотите удалить эту запись?\n\nУдаленную запись невозможно восстановить!\n\nВы удаляете её навсегда!</string>
